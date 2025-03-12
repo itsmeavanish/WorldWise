@@ -1,0 +1,16 @@
+{
+  "cities": [
+    {
+      "id": "67e8",
+      "cityName": "Vall de Cardos",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2025-03-12T13:24:18.716Z",
+      "notes": "",
+      "position": {
+        "lat": "42.58730224696159",
+        "lng": "1.2084960937500002"
+      }
+    }
+  ]
+}

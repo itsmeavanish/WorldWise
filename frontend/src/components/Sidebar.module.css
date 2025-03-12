@@ -1,0 +1,38 @@
+.sidebar {
+    flex-basis: 56rem;
+    background-color: var(--color-dark--1);
+    padding: 3rem 5rem 3.5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    border: 5px solid var(--surface);
+  }
+  
+  .footer {
+    margin-top: auto;
+  }
+  
+  .copyright {
+    font-size: 1.2rem;
+    color: var(--color-light--1);
+  }
+  .back{
+    background-color: rgb(63, 72, 72);
+    border: none;
+    padding: 15px;
+    font-size: 1.7rem;
+    color: var(--color-light--1);
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+  }
+  .back:hover{
+    background-color: rgb(111, 120, 120);
+    color: white;
+  }
+  .homebutton{
+    position: relative;
+    bottom: 0;
+    top: 3%;
+  }

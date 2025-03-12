@@ -1,0 +1,228 @@
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 50;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  width: 30%;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 2.7rem;
+  font-weight: bold;
+  color: var(--text);
+}
+
+.logo-icon {
+  width: 4rem;
+  height: 4rem;
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  font-size: 1.5rem;
+  width: 95%;
+  align-items: center;
+  justify-content: end;
+}
+
+.nav-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.cta-button {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+}
+
+.user {
+  position: relative;
+  width: 20rem;
+  background-color: var(--color-dark--1);
+  padding: 0.4rem 1rem;
+  border-radius: 7px;
+  z-index: 50;
+  box-shadow: 0 0.8rem 2.4rem rgba(36, 42, 46, 0.5);
+  font-size: 1.6rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background-image: linear-gradient(to right, #60a5fa, #a855f7);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.user img {
+  border-radius: 100px;
+  height: 3rem;
+}
+
+.user button {
+  background-color: var(--color-dark--2);
+  border-radius: 7px;
+  border: none;
+  padding: 0.6rem 1rem;
+  color: inherit;
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+ 
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.nav a:link,
+.nav a:visited {
+  text-decoration: none;
+  color: var(--color-light--2);
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* CSS Modules feature */
+.nav a:global(.active) {
+  color: var(--color-brand--2);
+}
+
+a.ctaLink:link,
+a.ctaLink:visited {
+  background-color: var(--color-brand--2);
+  color: var(--color-dark--0);
+  padding: 0.8rem 2rem;
+  border-radius: 7px;
+}
+
+
+/* Profile Box */
+.profilecontainer {
+  cursor: pointer;
+
+}
+.profilebox {
+  position: absolute;
+  width: fit-content;
+  padding: 2rem;
+  background-color: #010B13;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  opacity: 1;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  color: #DEEFFD;
+  font-weight: 500;
+  top: 7rem;
+  right: 12.5rem;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.profileicon {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Profile Icon */
+.profileicon img {
+  height: 6rem;
+  width: 6.4rem;
+  border-radius: 47%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex;
+  border: 2px solid #00B618;
+}
+
+.profileicon img:hover {
+  transform: scale(1.1);
+}
+
+
+/* Hover Effect */
+.profilecontainer:hover .profilebox {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Profile Box Content */
+.profilebox h3 {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+}
+
+.profilebox p {
+  margin: 0 0 10px 0;
+  color: white;
+  font-size: 14px;
+}
+
+.profilebox button {
+  padding: 8px 10px;
+  width: 100%;
+  border: none;
+  background-color: #007bff;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profilebox button:hover {
+  background-color: #0056b3;
+}
