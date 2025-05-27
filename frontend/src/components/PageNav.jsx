@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link, useNavigate} from 'react-router-dom'
+import { Link, NavLink, useNavigate} from 'react-router-dom'
 import {motion} from 'framer-motion'
 import { useAuth } from '../contexts/useAuth';
 import { Globe2 } from 'lucide-react';
 import './PagesNav.css'
 import Logo from './Logo';
+import Trips from '../Forms/Trips';
 export default function PageNav() {
     const {isAuthenticated,user,logout}=useAuth();
     const navigate=useNavigate();
@@ -55,7 +56,9 @@ export default function PageNav() {
             ) : (
               <button className="cta-button" onClick={()=>navigate('login')}>Get Started</button>
             )}
+             {isAuthenticated && <NavLink to="/trips">Your Trips</NavLink>}
             {isAuthenticated && <Profile /> }
+           
           </motion.div>
         </div>
       </nav>

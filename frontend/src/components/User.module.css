@@ -2,7 +2,7 @@
     position: absolute;
     top: 4.2rem;
     right: 4.2rem;
-    background-color: var(--color-dark--1);
+    background-color: rgb(31, 41, 55);
     padding: 1rem 1.4rem;
     border-radius: 7px;
     z-index: 999;
@@ -21,7 +21,7 @@
   }
   
   .user button {
-    background-color: var(--color-dark--2);
+    background-color: rgb(45, 63, 88);
     border-radius: 7px;
     border: none;
     padding: 0.6rem 1.2rem;

@@ -166,7 +166,7 @@ a.ctaLink:visited {
   visibility: hidden;
   color: #DEEFFD;
   font-weight: 500;
-  top: 7rem;
+  top: 6.5rem;
   right: 12.5rem;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }

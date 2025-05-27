@@ -12,6 +12,7 @@ import Spinner from "../components/Spinner";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useCities } from "../contexts/CitiesContext";
+import { useAuth } from "../contexts/useAuth";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -34,7 +35,8 @@ function Form() {
   const [isLoadingGeoCoding, setIsLoadingGeoCoding] = useState(false);
   const [emoji, setEmoji] = useState("");
   const [geoCodingError, setGeoCodingError] = useState("");
-
+  const {user}=useAuth();
+  console.log("user",user);
   useEffect(
     function () {
       if (!lat && !lng) return;
@@ -46,7 +48,8 @@ function Form() {
             `${BASE_URL}?latitude=${lat}&longitude=${lng}`
           );
           const data = await res.json();
-          console.log(data);
+          console.log("data",data);
+
 
           if (!data.countryCode)
             throw new Error(
@@ -87,6 +90,7 @@ function Form() {
       date,
       notes,
       position: { lat, lng },
+      email:user?.email,
     };
 
     await createCity(newCity);

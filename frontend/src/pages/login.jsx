@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Compass, Lock, Mail } from 'lucide-react';
+import { Compass, Lock, Mail, Rotate3D } from 'lucide-react';
 import './auth.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -25,7 +25,7 @@ const Login = () => {
     e.preventDefault();
     try{
       setloading(true);
-      const response = await axios.post(`http://localhost:4000/api/auth/login`, formData);
+      const response = await axios.post(`https://worldwisebackend.vercel.app/api/auth/login`, formData);
       console.log("response",response);
       if (response){
         localStorage.setItem('token', response.data.token);
@@ -69,10 +69,10 @@ const Login = () => {
         <div className="logo-container">
           <motion.div
             className="logo"
-            whileHover={{ rotate: 180 }}
-            transition={{ duration: 0.5 }}
+            whileHover={{rotate:265}}
+            transition={{ duration: 0.5 }}   
           >
-            <Compass size={48} />
+            <Compass size={52} />
           </motion.div>
         </div>
 

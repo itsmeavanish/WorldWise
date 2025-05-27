@@ -1,6 +1,7 @@
 import React from "react";
 import { Star, MapPin, Wifi, Coffee, Car, School as Pool, Utensils, Building2, CookingPot, WashingMachine, TreePalm, Mountain, PawPrint } from "lucide-react";
 import "./HotelList.css"; // Import the normal CSS file
+import { useNavigate } from "react-router-dom";
 const imageLink=[
   "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=1200",
   "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200",
@@ -42,6 +43,7 @@ const AmenityIcon = ({ type }) => {
 };
 
 function HotelList({hotels}) {
+  const navigate=useNavigate();
   function SubList({hotel}){
     const { id, name, address,rating, priceRange, amenities,distance } = hotel;
 
@@ -85,8 +87,8 @@ function HotelList({hotels}) {
 
         <div className="hotel-footer">
           <span className="hotel-price">{priceRange} $</span>
-          <button className="book-button">
-            Book Now
+          <button className="book-button" onClick={()=>navigate('/trips')}>
+            Add to Your travel List
           </button>
         </div>
       </div>

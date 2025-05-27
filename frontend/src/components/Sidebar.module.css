@@ -1,6 +1,6 @@
 .sidebar {
     flex-basis: 56rem;
-    background-color: var(--color-dark--1);
+
     padding: 3rem 5rem 3.5rem 5rem;
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@
     color: var(--color-light--1);
   }
   .back{
-    background-color: rgb(63, 72, 72);
+   background-color: rgb(31, 41, 55) ;
     border: none;
     padding: 15px;
     font-size: 1.7rem;

@@ -53,7 +53,7 @@ function HomePage() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="cta-button hero-cta"
-            onClick={() => navigate(isAuthenticated ? '/applayout' : '/login')}
+            onClick={() => navigate(isAuthenticated ? '/Applayout' : '/login')}
           >
             Plan Your Adventure
           </motion.button>

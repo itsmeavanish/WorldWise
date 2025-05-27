@@ -140,6 +140,8 @@
 }
 
 .book-button {
-  padding: 0.5rem 1rem; /* px-4 py-2 */
+  padding: 0.8rem 1rem; /* px-4 py-2 */
   background: linear-gradient(to right, #9333ea, #ec4899); /* bg-gradient-to-r from-purple-600 to-pink-500 */
-  color: white; /* text-white */}
+  color: white; /* text-white */
+  border-radius: 8px;
+font-size: 1.25rem;}

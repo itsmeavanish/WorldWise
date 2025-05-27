@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/useAuth';
 
 export default function User() {
     const {logout,isAuthenticated,user}=useAuth();
-    console.log("user",user)
+    
     const navigate=useNavigate();
     function handleclick(){
         logout();
@@ -16,7 +16,7 @@ export default function User() {
   return (
     <div className={styles.user}>
       <img src={user?.profilePhoto} alt='error'/>
-      <span>Welcome {user?.name}</span>
+      <span>Welcome {user?.name.split(" ")[0]}</span>
       <button onClick={handleclick}>logout</button>
     </div>
   )

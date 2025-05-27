@@ -4,19 +4,15 @@ import axios from "axios";
 const Authcontext = createContext();
 
 const getToken = () => localStorage.getItem("token");
-const getTrashData = () => JSON.parse(localStorage.getItem("trashData")) || [];
-const getFavoriteData=()=>JSON.parse(localStorage.getItem("favoriteData"))||[];
-const getlinks=()=>JSON.parse(localStorage.getItem("linksData"))||[]
+const getUser = () => JSON.parse(localStorage.getItem("user")) || null;
+const getTrips = () =>(localStorage.getItem("trips")) || [];
 
 const initialState = {
-  user: null,
+  user: getUser(),
   isAuthenticated: !!getToken(),
   loading: true,
   error: null,
-  value: "",
-  trashData: getTrashData(),
-  favoriteData: getFavoriteData(),
-  linksData:getlinks(),
+  trips: getTrips(),
 };
 
 function reducer(state, action) {
@@ -24,12 +20,16 @@ function reducer(state, action) {
     case "login":
       return { ...state, isAuthenticated: true, loading: false, error: null };
     case "logout":
-      return { ...state, user: null, isAuthenticated: false, loading: false };
+      return { ...state, user: null, isAuthenticated: false, loading: false, trips: [] };
     case "loading":
       return { ...state, loading: action.payload ?? true, error: null };
     case "error":
       return { ...state, loading: false, error: action.payload };
+    case "setTrips":
+      localStorage.setItem("trips", JSON.stringify(action.payload));
+      return { ...state, trips: action.payload };
     case "setUser":
+      localStorage.setItem("user", JSON.stringify(action.payload));
       return {
         ...state,
         user: action.payload,
@@ -37,23 +37,15 @@ function reducer(state, action) {
         loading: false,
         error: null,
       };
-    case "search":
-      return { ...state, value: action.payload };
-    case "trashvalue":
-      return { ...state, trashData: action.payload };
-    case "favoritevalue":
-      return { ...state, favoriteData: action.payload };
-      case "links":
-      return { ...state, linksData: action.payload };
     default:
       throw new Error("Unknown action type");
   }
 }
 
 export default function AuthProvider({ children }) {
-  const API_BASE_URL = "http://localhost:4000/";
+  const API_BASE_URL = "https://worldwisebackend.vercel.app/";
 
-  const [{ user, isAuthenticated, loading, error, value, trashData, favoriteData,linksData }, dispatch] = useReducer(reducer, initialState);
+  const [{ user, isAuthenticated, loading, error, trips }, dispatch] = useReducer(reducer, initialState);
 
   const fetchUserProfile = async () => {
     try {
@@ -79,15 +71,15 @@ export default function AuthProvider({ children }) {
       dispatch({ type: "loading", payload: false });
     }
   }, [isAuthenticated]);
+
   const login = () => dispatch({ type: "login" });
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("trips");
     dispatch({ type: "logout" });
   };
-  const search = (value) => dispatch({ type: "search", payload: value });
-  const trash = (value) => dispatch({ type: "trashvalue", payload: value });
-  const favorite = (value) => dispatch({ type: "favoritevalue", payload: value });
-  const links=(value)=>dispatch({type:"links",payload:value})
+  const setTrips = (value) => dispatch({ type: "setTrips", payload: value });
 
   return (
     <Authcontext.Provider
@@ -96,16 +88,10 @@ export default function AuthProvider({ children }) {
         isAuthenticated,
         loading,
         error,
-        value,
-        trashData,
-        favoriteData,
         login,
         logout,
-        search,
-        trash,
-        favorite,
-        links,
-        linksData
+        setTrips,
+        trips,
       }}
     >
       {children}

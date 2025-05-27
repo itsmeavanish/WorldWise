@@ -17,11 +17,11 @@ export default function City() {
     useEffect(function(){
       getCity(id);
     },[id]);
-    const {cityName,emoji,date,notes}=currentcity;
+    const {cityName,emoji,date,notes,email}=currentcity;
     if(loading) return <Spinner /> 
  
   return (
-    <div className={styles.city}>
+    <div className={styles.city} style={{background:"#1F2937"}} >
       <div className={styles.row}>
         <h6>CITYNAME</h6>
         <h3>
@@ -46,7 +46,7 @@ export default function City() {
           Learn More
         </h6>
         <a href={"https://en.wikipedia.org/wiki/List_of_cities_in_India_by_population"} target='_blank' rel="noreferrer"> Check out {cityName} on Wikipedia</a>
-        <Link to="/pricing" > Generate Your Travel Plan for this Trip</Link>
+        <Link to="/hotelform" > Generate Your Travel Plan for this Trip</Link>
       </div>
       <div>
         <BackButton/>

@@ -39,7 +39,8 @@ cloudinary.cloudinaryConnect();
 
 //api route mounting
 const Upload=require("./routes/FileUpload")
-const authRoutes=require("./routes/userRoute")
+const authRoutes=require("./routes/userRoute");
+const TripRoutes = require("./routes/TripPlanner");
 app.get("/",
     (req,res)=>{
         res.json("Hello")
@@ -47,6 +48,7 @@ app.get("/",
 )
 app.use('/api/auth', authRoutes);
 app.use('/api/auth/upload',Upload);
+app.use('/api/auth/trips',TripRoutes)
 //activating server
 app.listen(PORT,()=>{
     console.log(`App is running at ${PORT}`)

@@ -3,13 +3,13 @@ import styles from "./AppNav.module.css"
 import { NavLink } from 'react-router-dom'
 export default function AppNav(){
     return ( 
-        <nav className={styles.nav}>
+        <nav className={styles.nav} >
             <ul>
                 <li>
-                    <NavLink to='cities'>Cities</NavLink>
+                    <NavLink to='cities'  style={{background:"rgb(31, 41, 55)"}}>Cities</NavLink>
                 </li>
                 <li>
-                    <NavLink to='countries'>Countries</NavLink>
+                    <NavLink to='countries'  style={{background:"rgb(31, 41, 55)"}}>Countries</NavLink>
                 </li>
             </ul>
         </nav>

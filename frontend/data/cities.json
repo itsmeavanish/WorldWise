@@ -1,16 +1,30 @@
 {
   "cities": [
     {
-      "id": "67e8",
-      "cityName": "Vall de Cardos",
+      "id": "a891",
+      "cityName": "Andujar",
       "country": "Spain",
       "emoji": "🇪🇸",
-      "date": "2025-03-12T13:24:18.716Z",
+      "date": "2025-04-11T11:58:38.025Z",
       "notes": "",
       "position": {
-        "lat": "42.58730224696159",
-        "lng": "1.2084960937500002"
-      }
+        "lat": "38.34600676719644",
+        "lng": "-3.8891601562500004"
+      },
+      "email": "Agnita"
+    },
+    {
+      "id": "3687",
+      "cityName": "Kilosa",
+      "country": "Tanzania, the United Republic of",
+      "emoji": "🇹🇿",
+      "date": "2025-05-20T16:57:55.048Z",
+      "notes": "hey ",
+      "position": {
+        "lat": "-6.223673917478772",
+        "lng": "37.15799417358959"
+      },
+      "email": "Andujar"
     }
   ]
 }
