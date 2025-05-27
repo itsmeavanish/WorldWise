@@ -1,6 +1,6 @@
 import { Brain, Compass, MapPin } from 'lucide-react'
 import React from 'react'
-import './features.css'
+import './Features.css'
 import PageNav from '../components/PageNav'
 export default function Features() {
    
