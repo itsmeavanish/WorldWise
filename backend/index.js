@@ -15,7 +15,7 @@ const PORT=process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors({
-    origin: "http://localhost:5173", // Allow requests from your frontend
+    origin: "https://world-wise-gold-ten.vercel.app/", // Allow requests from your frontend
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
     credentials: true // Allow cookies to be sent with requests (if needed)
 }));
