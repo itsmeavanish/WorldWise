@@ -47,7 +47,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        'https://worldwisebackend.vercel.app/api/auth/register',
+        'https://worldwise-backend-iota.vercel.app/api/auth/register',
         data,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );

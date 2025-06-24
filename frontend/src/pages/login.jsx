@@ -25,7 +25,7 @@ const Login = () => {
     e.preventDefault();
     try{
       setloading(true);
-      const response = await axios.post(`https://worldwisebackend.vercel.app/api/auth/login`, formData);
+      const response = await axios.post(`https://worldwise-backend-iota.vercel.app/api/auth/login`, formData);
       console.log("response",response);
       if (response){
         localStorage.setItem('token', response.data.token);

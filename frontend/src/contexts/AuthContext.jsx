@@ -43,7 +43,7 @@ function reducer(state, action) {
 }
 
 export default function AuthProvider({ children }) {
-  const API_BASE_URL = "https://worldwisebackend.vercel.app/";
+  const API_BASE_URL = "https://worldwise-backend-iota.vercel.app/";
 
   const [{ user, isAuthenticated, loading, error, trips }, dispatch] = useReducer(reducer, initialState);
 
