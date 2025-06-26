@@ -1,0 +1,16 @@
+{
+  "headers": [
+    {
+      "source": "/assets/:path*.js",
+      "headers": [
+        { "key": "Content-Type", "value": "application/javascript" }
+      ]
+    },
+    {
+      "source": "/assets/:path*.css",
+      "headers": [
+        { "key": "Content-Type", "value": "text/css" }
+      ]
+    }
+  ]
+}
