@@ -15,8 +15,15 @@
   ],
   "rewrites": [
     {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    }
+  ],
+  "redirects": [
+    {
       "source": "/(.*)",
-      "destination": "/"
+      "destination": "/404",
+      "statusCode": 404
     }
   ]
 }

@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run start-frontend\" \"npm run server\"",
-    "start-frontend": "vite",
+    "dev": "concurrently \"npm run start\" \"npm run server\"",
+    "start": "vite",
     "server": "json-server --watch data/cities.json --port 9000",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
