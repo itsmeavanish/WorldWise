@@ -14,6 +14,18 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
     credentials: true // Allow cookies if needed
 }));
+// Preflight opitions
+app.options('/api/auth/login', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://world-wise-gold-ten.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.sendStatus(204); // No Content
+});
+
+// Actual route handler
+app.post('/api/auth/login', (req, res) => {
+    res.json({ message: 'Login successful!' });
+});
 
 app.use(fileupload({
     useTempFiles: true, // Enable temporary file storage
