@@ -5,8 +5,7 @@ import { useCities } from '../contexts/CitiesContext';
 
 import Spinner from '../components/Spinner';
 import PageNav from '../components/PageNav';
-import styles from "./Gemini.module.css"
-import SubHotelList from './SubHotelList';
+import styles from "./Gemini.module.css";
 import HotelList from './SubHotelList';
 export default function Gemini() {
   const genAI = new GoogleGenerativeAI("AIzaSyCeuJWAwNPnhh0mflQkltpjiKwLsivN-dU");

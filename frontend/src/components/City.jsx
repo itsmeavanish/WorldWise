@@ -18,7 +18,7 @@ export default function City() {
     useEffect(function(){
       getCity(id);
     },[id]);
-    const {cityName,emoji,date,notes,email}=currentcity;
+    const {cityName,emoji,date,notes}=currentcity;
     if(loading) return <Spinner /> 
  
   return (
