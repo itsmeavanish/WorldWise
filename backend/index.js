@@ -46,7 +46,7 @@ app.get("/",
 const Upload = require("./routes/FileUpload");
 const authRoutes = require("./routes/userRoute");
 const TripRoutes = require("./routes/TripPlanner");
-const CityRoutes=require("./routes/cityRoute");
+const CityRoutes=require("./routes/cityroute");
 
 app.use('/api/auth', authRoutes);
 app.use('/api/auth/upload', Upload);
