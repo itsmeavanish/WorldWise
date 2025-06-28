@@ -5,22 +5,17 @@ const fileupload = require("express-fileupload");
 const app = express();
 
 // PORT Configuration
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 // Middleware Configuration
 app.use(express.json());
 app.use(cors({
-    origin: ["https://world-wise-gold-ten.vercel.app", "http://localhost:5173"], // Allow requests from frontend origins
+    origin: ["https://world-wise-gold-ten.vercel.app"], // Allow requests from frontend origins
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
     credentials: true // Allow cookies if needed
 }));
 // Preflight opitions
-app.options('/api/auth/login', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://world-wise-gold-ten.vercel.app');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.sendStatus(204); // No Content
-});
+app.options('*', cors());
 
 // Actual route handler
 app.post('/api/auth/login', (req, res) => {
@@ -64,7 +59,7 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ error: "Something went wrong!", details: err.message });
 });
-
+app.get('/favicon.ico', (req, res) => res.status(204));
 // Server Activation
 app.listen(PORT, () => {
     console.log(`App is running at http://localhost:${PORT}`);

@@ -9,5 +9,12 @@ export default defineConfig({
     mimeTypes: {
       '.jsx': 'application/javascript',
     },
+    proxy: {
+            "/api": {
+                target: "https://worldwise-backend-iota.vercel.app",
+                changeOrigin: true,
+                secure: true,
+            },
+        },
   },
 })

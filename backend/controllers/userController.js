@@ -88,6 +88,7 @@ const loginUser = async (req, res) => {
         email: user.email,
         profilePhoto: user.profilePhoto,
         token: generateToken(user._id),
+        message: "Login successful from authRoutes!" 
       });
     } else {
       res.status(401).json({ message: "Invalid email or password" });
