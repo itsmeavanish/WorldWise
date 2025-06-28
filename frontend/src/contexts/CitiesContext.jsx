@@ -12,7 +12,7 @@ const CitiesContext = createContext();
       async function fetchCities(){
         try{
           setloading(true)
-          const res =await fetch(`${BASE_URL}/cities/getCities`);
+          const res =await fetch(`${BASE_URL}/cities`);
           const data =await res.json();
           setcities(data);
           
@@ -34,7 +34,7 @@ const CitiesContext = createContext();
         setcurrentcity(data);
       }
       catch{
-          alert(" Error in Loading cities");
+          alert(" Error in Loading cities1");
       }
       finally{
         setloading(false);

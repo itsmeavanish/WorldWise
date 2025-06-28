@@ -39,7 +39,7 @@ cloudinary.cloudinaryConnect();
 // Home Route
 app.get("/",
     (req,res)=>{
-        res.json("WorlWise Backend is live")
+        res.json("WorldWise Backend is live")
     }
 )
 // API Route Mounting
@@ -51,7 +51,7 @@ const CityRoutes=require("./routes/cityroute");
 app.use('/api/auth', authRoutes);
 app.use('/api/auth/upload', Upload);
 app.use('/api/auth/trips', TripRoutes);
-app.use('api/auth/cities',CityRoutes);
+app.use('/api/auth/city',CityRoutes);
 
 //activating server
 app.listen(PORT,()=>{

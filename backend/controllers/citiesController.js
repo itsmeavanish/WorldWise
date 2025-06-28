@@ -41,7 +41,7 @@ const addCity=async(req,res)=>{
 const getCities=async(req,res)=>{
     try{
         const {email}=req.query;
-        const cities = await City.find({ email }).sort({ date: -1 });
+        const cities = await City.find().sort({ date: -1 });
         if (cities && cities.length > 0) {
             res.status(200).json(cities);
         }
