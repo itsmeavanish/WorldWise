@@ -18,7 +18,7 @@ const citySchema=new mongoose.Schema({
     notes:{
         type:String,
     },
-    postion:{
+    position:{
         lng: {
             type: String,
             required: true

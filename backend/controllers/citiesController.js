@@ -1,59 +1,50 @@
-const express=require("express");
-const City=require("../models/City");
+const express = require("express");
+const City = require("../models/City");
 
-const addCity=async(req,res)=>{
-    try{
-        const {cityName,country,emoji,date,notes,position:{lat,lng},email}=req.body;
-        console.log(req.body);
-        const cities=await City.create({
-            cityName,
-            country,
-            emoji,
-            date,
-            notes,
-            position:{
-                lat,
-                lng
-            },
-            email
-        });
-        if(cities){
-            res.status(201).json({
-                _id:cities._id,
-                cityName:cities.cityName,
-                country:cities.country,
-                emoji:cities.emoji,
-                date:cities.date,
-                notes:cities.notes,
-                position:cities.position,
-                email:cities.email
-            });
-        }
-        else {
-            res.status(400).json({ message: "Invalid user data" });
-            }
-    }
-    catch(error){
-        console.error(error);
-        res.status(500).json({message:error.message || "Server error"});
-    }
-}
-const getCities=async(req,res)=>{
-    try{
-        const {email}=req.query;
-        const cities = await City.find().sort({ date: -1 });
-        if (cities && cities.length > 0) {
-            res.status(200).json(cities);
-        }
-        else {
-            res.status(404).json({ message: "No cities found for this user" });
-        }
-    }
-    catch(error){
-        console.error(error);
-        res.status(500).json({message:error.message || "Server error"});
-        
-    }
-}
+// Add City
+const addCity = async (req, res) => {
+  try {
+    const { cityName, country, emoji, date, notes, lat, lng, email } = req.body;
 
-module.exports={addCity,getCities};
+    // Validate input
+    if (!cityName || !country || !lat || !lng || !email) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const city = await City.create({
+      cityName,
+      country,
+      emoji,
+      date,
+      notes,
+      position: { lat, lng },
+      email,
+    });
+
+    res.status(201).json(city);
+  } catch (error) {
+    console.error("Error in addCity:", error.message);
+    res.status(500).json({ message: error.message || "Server error" });
+  }
+};
+
+// Get Cities
+const getCities = async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    // Fetch cities with optional email filtering
+    const cities = await City.find().sort({ date: -1 });
+
+    if (!cities || cities.length === 0) {
+      return res.status(404).json({ message: "No cities found" });
+    }
+
+    res.status(200).json(cities);
+  } catch (error) {
+    console.error("Error in getCities:", error.message);
+    res.status(500).json({ message: error.message || "Server error" });
+  }
+};
+
+module.exports = { addCity, getCities };

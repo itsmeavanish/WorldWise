@@ -12,7 +12,7 @@ const CitiesContext = createContext();
       async function fetchCities(){
         try{
           setloading(true)
-          const res =await fetch(`${BASE_URL}/cities`);
+          const res =await fetch(`${BASE_URL}/cities/fetch`);
           const data =await res.json();
           setcities(data);
           
