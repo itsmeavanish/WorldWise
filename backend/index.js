@@ -36,17 +36,23 @@ db.connect()
 
 const cloudinary = require("./config/cloudinary");
 cloudinary.cloudinaryConnect();
-
-//api route mounting
-const Upload=require("./routes/FileUpload")
-const authRoutes=require("./routes/userRoute")
+// Home Route
 app.get("/",
     (req,res)=>{
-        res.json("Hello")
+        res.json("WorlWise Backend is live")
     }
 )
+// API Route Mounting
+const Upload = require("./routes/FileUpload");
+const authRoutes = require("./routes/userRoute");
+const TripRoutes = require("./routes/TripPlanner");
+const CityRoutes = require("./routes/cities");
+
 app.use('/api/auth', authRoutes);
-app.use('/api/auth/upload',Upload);
+app.use('/api/auth/upload', Upload);
+app.use('/api/auth/trips', TripRoutes);
+app.use('api/auth/cities',CityRoutes);
+
 //activating server
 app.listen(PORT,()=>{
     console.log(`App is running at ${PORT}`)

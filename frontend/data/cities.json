@@ -1,30 +1,30 @@
 {
   "cities": [
     {
-      "id": "a891",
-      "cityName": "Andujar",
+      "id": "85f2",
+      "cityName": "Tobed",
       "country": "Spain",
       "emoji": "🇪🇸",
-      "date": "2025-04-11T11:58:38.025Z",
+      "date": "2025-06-28T07:51:14.741Z",
       "notes": "",
       "position": {
-        "lat": "38.34600676719644",
-        "lng": "-3.8891601562500004"
+        "lat": "41.37808490322534",
+        "lng": "-1.3631429889154645"
       },
-      "email": "Agnita"
+      "email": "Moral de Hornuez"
     },
     {
-      "id": "3687",
-      "cityName": "Kilosa",
-      "country": "Tanzania, the United Republic of",
-      "emoji": "🇹🇿",
-      "date": "2025-05-20T16:57:55.048Z",
-      "notes": "hey ",
+      "id": "7d06",
+      "cityName": "Limbrassac",
+      "country": "France",
+      "emoji": "🇫🇷",
+      "date": "2025-06-28T07:51:22.483Z",
+      "notes": "",
       "position": {
-        "lat": "-6.223673917478772",
-        "lng": "37.15799417358959"
+        "lat": "43.02151334093503",
+        "lng": "1.8636166375540733"
       },
-      "email": "Andujar"
+      "email": "Tobed"
     }
   ]
 }

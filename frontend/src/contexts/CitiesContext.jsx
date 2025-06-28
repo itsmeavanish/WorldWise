@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, useContext } from "react";
 
 
-const BASE_URL = "http://localhost:9000";
+const BASE_URL = "https://worldwise-backend-iota.vercel.app/api/auth";
 
 const CitiesContext = createContext();
  export default function CitiesProvider({children}){
@@ -12,7 +12,7 @@ const CitiesContext = createContext();
       async function fetchCities(){
         try{
           setloading(true)
-          const res =await fetch(`${BASE_URL}/cities`);
+          const res =await fetch(`${BASE_URL}/cities/getCities`);
           const data =await res.json();
           setcities(data);
           
@@ -52,6 +52,7 @@ const CitiesContext = createContext();
           }
         );
         const data =await res.json();
+        
         setcities((cities)=>[...cities,data])
       }
       catch{
