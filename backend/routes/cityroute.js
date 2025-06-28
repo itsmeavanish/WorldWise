@@ -1,6 +1,6 @@
 const express=require("express");
 const router=express.Router();
-const {addCity,getCities}=require("../controllers/cities");
+const {addCity,getCities}=require("../controllers/citiesController");
 const {protect}=require("../middleware/authMiddleware");
 
 router.post("/",protect,addCity);
