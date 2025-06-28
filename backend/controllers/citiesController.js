@@ -55,3 +55,5 @@ const getCities=async(req,res)=>{
         
     }
 }
+
+module.exports={addCity,getCities};
