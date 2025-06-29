@@ -29,15 +29,13 @@ export default function App() {
       <Suspense  fallback={<Spinner/>}>
       <Routes>
               <Route index element={<HomePage />} />
-              
-              <Route path="features" element={<Features />} />
-          
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<Signup />} />
-              <Route path="pricing" element={<ProtectedRoute><Gemini /></ProtectedRoute>} />
+              <Route path="*" element={<PagenotFound />} />
+              <Route path="features" element={<Features />} />
+                <Route path="pricing" element={<ProtectedRoute><Gemini /></ProtectedRoute>} />
                 <Route path="hotelform" element={<HotelForms />} />
                 <Route  path="trips" element={<Trips /> } />
-              <Route path="*" element={<PagenotFound />} />
               <Route
                 path="Applayout"
                 element={
@@ -46,14 +44,13 @@ export default function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<Navigate replace to ="cities" />} />
                 
+                 
+                <Route index element={<Navigate replace to ="cities" />} />
                 <Route path="cities" element={<CityList />} />
                 <Route path="cities/:id" element={<City />} />
                 <Route path="countries" element={<Country />} />
                 <Route path="form" element={<Form />} />
-                
-                
 
               </Route>
             </Routes>

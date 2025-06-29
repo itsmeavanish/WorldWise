@@ -86,7 +86,9 @@ function Form() {
       emoji,
       date,
       notes,
-      position: { lat, lng },
+      lat,
+      lng,
+      userId:user?.uid,
       email:user?.email,
     };
 

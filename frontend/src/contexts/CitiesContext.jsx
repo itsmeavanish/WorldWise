@@ -1,49 +1,70 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useEffect, useContext, useReducer } from "react";
+import { useAuth } from "./useAuth";
 
 
 const BASE_URL = "https://worldwise-backend-iota.vercel.app/api/auth";
 
 const CitiesContext = createContext();
+const cityState = {
+  cities:[],
+  loading:false,
+  currentcity:{}
+};
+function reducer(state,action){
+  switch(action.type){
+    case"setCities":
+    return{state,cities:action.payload}
+    case "setLoading":
+    return{...state,loading:action.payload}
+    case "setCurrentCity":
+    return{...state,currentcity:action.payload}
+    default:
+      throw new Error(`Unknown action type: ${action.type}`);
+  }
+}
  export default function CitiesProvider({children}){
-    const [cities,setcities]=useState([]);
-    const [loading,setloading]=useState(false);
-    const [currentcity,setcurrentcity]=useState({})
+  const {user}=useAuth();
+  const userId = user?._id;
+  const [{cities, loading, currentcity}, dispatch] = useReducer(reducer,cityState);
     useEffect(function(){
       async function fetchCities(){
         try{
-          setloading(true)
-          const res =await fetch(`${BASE_URL}/cities/fetch`);
+          dispatch({type:"setLoading",payload:true});
+          const res =await fetch(`${BASE_URL}/city/fetch?userId=${userId}`);
           const data =await res.json();
-          setcities(data);
+          const mess=data.message;
+          if(data.status === "success" && mess === "Cities fetched successfully"){
+            dispatch({type:"setCities",payload:data});
+          }
           
         }
         catch{
             alert(" Error in Loading cities");
         }
         finally{
-          setloading(false);
+          dispatch({type:"setLoading",payload:false});
         }
       }
       fetchCities();
-    },[]);
+    },[userId]);
     async function getCity(id){
       try{
-        setloading(true)
-        const res =await fetch(`${BASE_URL}/cities/${id}`);
+        dispatch({type:"setLoading",payload:true});
+        const res =await fetch(`${BASE_URL}/city/${id}`);
         const data =await res.json();
-        setcurrentcity(data);
+        dispatch({type:"setCurrentCity",payload:data});
       }
       catch{
           alert(" Error in Loading cities1");
       }
       finally{
-        setloading(false);
+        dispatch({type:"setLoading",payload:false});
       }
     }
     async function createCity(newCity){
       try{
-        setloading(true)
-        const res =await fetch(`${BASE_URL}/cities`,
+      dispatch({type:"setLoading",payload:true});
+        const res =await fetch(`${BASE_URL}/city/post`,
           {method:"POST",
             body:JSON.stringify(newCity),
             headers:{
@@ -53,29 +74,31 @@ const CitiesContext = createContext();
         );
         const data =await res.json();
         
-        setcities((cities)=>[...cities,data])
+        dispatch({type:"setCities",payload:[...cities,data]});
+        dispatch({type:"setCurrentCity",payload:data});
       }
       catch{
           alert(" Error in Loading cities");
       }
       finally{
-        setloading(false);
+        dispatch({type:"setLoading",payload:false});
       }
     }
     async function deleteCity(id){
       try{
-        setloading(true)
+       dispatch({type:"setLoading",payload:true});
        await fetch(`${BASE_URL}/cities/${id}`,
           {method:"DELETE",}
         );
         
-        setcities((cities)=>{cities.filter((city)=>city.id !==id)})
+        const updatedCities = cities.filter(city => city._id !== id);
+        dispatch({type:"setCities",payload:updatedCities});
       }
       catch{
           alert(" Error in deleting cities");
       }
       finally{
-        setloading(false);
+        dispatch({type:"setLoading",payload:false});
       }
     }
     return( 

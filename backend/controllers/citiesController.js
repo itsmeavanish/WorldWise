@@ -5,6 +5,7 @@ const City = require("../models/City");
 const addCity = async (req, res) => {
   try {
     const { cityName, country, emoji, date, notes, lat, lng, email } = req.body;
+    const userId = req.query.userId || req.body.userId; // Get userId from query or body
 
     // Validate input
     if (!cityName || !country || !lat || !lng || !email) {
@@ -19,6 +20,7 @@ const addCity = async (req, res) => {
       notes,
       position: { lat, lng },
       email,
+      userId
     });
 
     res.status(201).json(city);
@@ -31,10 +33,10 @@ const addCity = async (req, res) => {
 // Get Cities
 const getCities = async (req, res) => {
   try {
-    const { email } = req.query;
+    const { userId } = req.query;
 
     // Fetch cities with optional email filtering
-    const cities = await City.find().sort({ date: -1 });
+    const cities = await City.find({userId}).sort({ date: -1 });
 
     if (!cities || cities.length === 0) {
       return res.status(404).json({ message: "No cities found" });

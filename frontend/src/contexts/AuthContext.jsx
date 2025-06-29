@@ -56,8 +56,8 @@ export default function AuthProvider({ children }) {
       const response = await axios.get(`${API_BASE_URL}api/auth/profile`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-
       dispatch({ type: "setUser", payload: response.data });
+
     } catch (err) {
       console.error("Error fetching user profile:", err);
       dispatch({ type: "error", payload: err.response?.data?.error || "Failed to fetch user profile" });

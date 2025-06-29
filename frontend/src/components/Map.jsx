@@ -11,6 +11,7 @@ import { useCities } from '../contexts/CitiesContext.jsx';
 export default function Map() {
 const [input,setinput]=useState(true);
   const {cities,isLoading}=useCities();
+  console.log("cities",cities);
   const [mapposition,setmapposition]=useState([40,0]);
   const [searchParams] = useSearchParams();
   
@@ -53,7 +54,7 @@ const [input,setinput]=useState(true);
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
     />
-    {cities?.map((city)=>(<Marker position={[city?.position?.lat,city?.position?.lng]}key={city.id} >
+    { cities.map((city)=>(<Marker position={[city?.position?.lat,city?.position?.lng]}key={city.id} >
       <Popup>
         <span>{city?.emoji}</span><span>{city?.cityName}</span>
       </Popup>

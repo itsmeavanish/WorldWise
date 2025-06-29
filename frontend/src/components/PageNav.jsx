@@ -9,6 +9,7 @@ import Trips from '../Forms/Trips';
 export default function PageNav() {
     const {isAuthenticated,user,logout}=useAuth();
     const navigate=useNavigate();
+    console.log("user",user);
     function Profile(){
             function handleclick(){
                 logout();
