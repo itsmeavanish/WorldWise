@@ -6,7 +6,7 @@ const addCity = async (req, res) => {
   try {
     const { cityName, country, emoji, date, notes, lat, lng, email } = req.body;
     const userId = req.query.userId || req.body.userId; // Get userId from query or body
-
+    console.log("Received data:", userId);
     // Validate input
     if (!cityName || !country || !lat || !lng || !email) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -33,7 +33,7 @@ const addCity = async (req, res) => {
 // Get Cities
 const getCities = async (req, res) => {
   try {
-    const { userId } = req.query;
+   const userId = req.query.userId || req.body.userId; 
 
     // Fetch cities with optional email filtering
     const cities = await City.find({userId}).sort({ date: -1 });

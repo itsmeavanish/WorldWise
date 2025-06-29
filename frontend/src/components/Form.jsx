@@ -33,7 +33,7 @@ function Form() {
   const [emoji, setEmoji] = useState("");
   const [geoCodingError, setGeoCodingError] = useState("");
   const {user}=useAuth();
-  console.log("user",user);
+  console.log("userssss",user);
   useEffect(
     function () {
       if (!lat && !lng) return;
@@ -80,6 +80,7 @@ function Form() {
     e.preventDefault();
     if (!cityName || !date) return;
 
+    
     const newCity = {
       cityName,
       country,
@@ -88,7 +89,7 @@ function Form() {
       notes,
       lat,
       lng,
-      userId:user?.uid,
+      userId:user?._id,
       email:user?.email,
     };
 

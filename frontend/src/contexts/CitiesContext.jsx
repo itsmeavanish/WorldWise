@@ -25,6 +25,7 @@ function reducer(state,action){
  export default function CitiesProvider({children}){
   const {user}=useAuth();
   const userId = user?._id;
+  
   const [{cities, loading, currentcity}, dispatch] = useReducer(reducer,cityState);
     useEffect(function(){
       async function fetchCities(){
@@ -32,6 +33,7 @@ function reducer(state,action){
           dispatch({type:"setLoading",payload:true});
           const res =await fetch(`${BASE_URL}/city/fetch?userId=${userId}`);
           const data =await res.json();
+          console.log("data",data);
           const mess=data.message;
           if(data.status === "success" && mess === "Cities fetched successfully"){
             dispatch({type:"setCities",payload:data});
