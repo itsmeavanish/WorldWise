@@ -34,9 +34,14 @@ const addCity = async (req, res) => {
 const getCities = async (req, res) => {
   try {
    const userId = req.query;
-
+if (!userId || typeof userId !== "string") {
+            return res.status(400).json({
+                status: "fail",
+                message: "Invalid or missing user ID",
+            });
+        }
     // Fetch cities with optional email filtering
-    const cities = await City.find({userId}).sort({ date: -1 });
+    const cities = await City.find({user:userId}).sort({ createdAt: -1 });
 
     if (!cities || cities.length === 0) {
       return res.status(404).json({ message: "No cities found" });
