@@ -55,7 +55,8 @@ function reducer(state,action){
         const res =await fetch(`${BASE_URL}/city/fetch?userId=${userId}`);
         const data =await res.json();
         const filteredData = data.fi(item => item._id === id);
-        dispatch({type:"setCurrentCity",payload:filteredData});
+        if(filteredData){
+        dispatch({type:"setCurrentCity",payload:filteredData});}
       }
       catch{
           alert(" Error in Loading cities1");
