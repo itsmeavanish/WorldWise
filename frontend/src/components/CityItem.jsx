@@ -14,7 +14,9 @@ const formatDate=(date)=>
 
 export default function CityItem({city}) {
   const {currentcity,deleteCity,loading}=useCities();
-   const {cityName,date,emoji,id,position,email}=city
+   const {cityName,date,emoji,_id,position,email}=city;
+   const id=city._id;
+   console.log("idhar pakka",city)
    const {user}=useAuth();
    function handleclick(e){
     e.preventDefault();

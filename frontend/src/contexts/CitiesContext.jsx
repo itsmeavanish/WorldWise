@@ -33,9 +33,8 @@ function reducer(state,action){
           dispatch({type:"setLoading",payload:true});
           const res =await fetch(`${BASE_URL}/city/fetch?userId=${userId}`);
           const data =await res.json();
-          console.log("data",data);
-          const mess=data.message;
-          if(data.status === "success" && mess === "Cities fetched successfully"){
+          console.log("dataa",data);
+          if(data.length){
             dispatch({type:"setCities",payload:data});
           }
           
@@ -50,11 +49,13 @@ function reducer(state,action){
       fetchCities();
     },[userId]);
     async function getCity(id){
+
       try{
         dispatch({type:"setLoading",payload:true});
-        const res =await fetch(`${BASE_URL}/city/${id}`);
+        const res =await fetch(`${BASE_URL}/city/fetch?userId=${userId}`);
         const data =await res.json();
-        dispatch({type:"setCurrentCity",payload:data});
+        const filteredData = data.fi(item => item._id === id);
+        dispatch({type:"setCurrentCity",payload:filteredData});
       }
       catch{
           alert(" Error in Loading cities1");
@@ -89,7 +90,7 @@ function reducer(state,action){
     async function deleteCity(id){
       try{
        dispatch({type:"setLoading",payload:true});
-       await fetch(`${BASE_URL}/cities/${id}`,
+       await fetch(`${BASE_URL}/city/delete/${id}`,
           {method:"DELETE",}
         );
         

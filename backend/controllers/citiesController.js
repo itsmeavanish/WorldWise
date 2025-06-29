@@ -29,20 +29,20 @@ const addCity = async (req, res) => {
     res.status(500).json({ message: error.message || "Server error" });
   }
 };
-
 // Get Cities
 const getCities = async (req, res) => {
   try {
-   const userId = req.query;
-if (!userId || typeof userId !== "string") {
+   const userId = req.query.userId;
+   console.log("userId",userId)
+if (!userId) {
             return res.status(400).json({
                 status: "fail",
                 message: "Invalid or missing user ID",
             });
         }
     // Fetch cities with optional email filtering
-    const cities = await City.find({user:userId}).sort({ createdAt: -1 });
-
+    const cities = await City.find({userId}).sort({ createdAt: -1 });
+    console.log("cities",cities)
     if (!cities || cities.length === 0) {
       return res.status(404).json({ message: "No cities found" });
     }
@@ -54,4 +54,40 @@ if (!userId || typeof userId !== "string") {
   }
 };
 
-module.exports = { addCity, getCities };
+const deleteCity = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Validate the city ID
+        if (!id) {
+            return res.status(400).json({
+                status: "fail",
+                message: "City ID is required",
+            });
+        }
+
+        // Find and delete the city
+        const city = await City.findByIdAndDelete(id);
+
+        if (!city) {
+            return res.status(404).json({
+                status: "fail",
+                message: "City not found",
+            });
+        }
+
+        res.status(200).json({
+            status: "success",
+            message: "City deleted successfully",
+        });
+    } catch (error) {
+        console.error("Error deleting city:", error);
+        res.status(500).json({
+            status: "error",
+            message: "An error occurred while deleting the city",
+            error: error.message,
+        });
+    }
+};
+
+module.exports = { addCity, getCities,deleteCity };

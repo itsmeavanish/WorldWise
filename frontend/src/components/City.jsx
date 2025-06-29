@@ -13,8 +13,9 @@ const formatDate=(date)=>
     weekday:"long",
   }).format(new Date(date));
 export default function City() {
-    const {id }=useParams();
-    const{getCity,currentcity,loading}=useCities()
+    const {id}=useParams();
+    const{getCity,currentcity,loading}=useCities();
+    console.log("current city",currentcity);
     useEffect(function(){
       getCity(id);
     },[id]);
