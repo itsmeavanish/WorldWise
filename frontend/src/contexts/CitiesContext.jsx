@@ -13,7 +13,7 @@ const cityState = {
 function reducer(state,action){
   switch(action.type){
     case"setCities":
-    return{state,cities:action.payload}
+    return{...state,cities:action.payload}
     case "setLoading":
     return{...state,loading:action.payload}
     case "setCurrentCity":

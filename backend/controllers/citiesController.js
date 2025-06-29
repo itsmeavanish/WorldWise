@@ -33,7 +33,7 @@ const addCity = async (req, res) => {
 // Get Cities
 const getCities = async (req, res) => {
   try {
-   const userId = req.query.userId || req.body.userId; 
+   const userId = req.query;
 
     // Fetch cities with optional email filtering
     const cities = await City.find({userId}).sort({ date: -1 });
