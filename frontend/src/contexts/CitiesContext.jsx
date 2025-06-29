@@ -33,11 +33,10 @@ function reducer(state,action){
           dispatch({type:"setLoading",payload:true});
           const res =await fetch(`${BASE_URL}/city/fetch?userId=${userId}`);
           const data =await res.json();
-          console.log("dataa",data);
           if(data.length){
             dispatch({type:"setCities",payload:data});
           }
-          
+
         }
         catch{
             alert(" Error in Loading cities");
@@ -52,11 +51,10 @@ function reducer(state,action){
 
       try{
         dispatch({type:"setLoading",payload:true});
-        const res =await fetch(`${BASE_URL}/city/fetch?userId=${userId}`);
-        const data =await res.json();
-        const filteredData = data.fi(item => item._id === id);
-        if(filteredData){
-        dispatch({type:"setCurrentCity",payload:filteredData});}
+        const data = cities.find(item => item._id === id);
+        
+        if(data){
+        dispatch({type:"setCurrentCity",payload:data});}
       }
       catch{
           alert(" Error in Loading cities1");

@@ -30,10 +30,11 @@ const addCity = async (req, res) => {
   }
 };
 // Get Cities
-const getCities = async (req, res) => {
+const getCities=async (req, res) => {
+  console.log("hello how are you")
   try {
    const userId = req.query.userId;
-   console.log("userId",userId)
+   console.log("userIdwjfh",userId);
 if (!userId) {
             return res.status(400).json({
                 status: "fail",
@@ -42,7 +43,6 @@ if (!userId) {
         }
     // Fetch cities with optional email filtering
     const cities = await City.find({userId}).sort({ createdAt: -1 });
-    console.log("cities",cities)
     if (!cities || cities.length === 0) {
       return res.status(404).json({ message: "No cities found" });
     }
@@ -65,7 +65,6 @@ const deleteCity = async (req, res) => {
                 message: "City ID is required",
             });
         }
-
         // Find and delete the city
         const city = await City.findByIdAndDelete(id);
 
