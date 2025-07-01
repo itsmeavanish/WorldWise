@@ -30,8 +30,8 @@ const Login = () => {
       if (response){
         localStorage.setItem('token', response.data.token);
         login(formData)
-        navigate("/");
-        toast.success("Succesfully Logged In");
+        navigate("/Applayout");
+        toast.success("Welcome back! You have successfully logged in.");
         login();
       }
     }

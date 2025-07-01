@@ -1,5 +1,5 @@
 .form {
-    background-color: var(--color-dark--2);
+    background-color: var(--color-grey-800);
     border-radius: 7px;
     padding: 2rem 3rem;
     width: 100%;
@@ -45,5 +45,19 @@
   :global(.react-datepicker) {
     font-family: inherit;
     font-size: 1.2rem;
+  }
+  .notes{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background-color: var( --color-silver-700);
+  color: var(--color-grey-100);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    box-shadow: var(--shadow-sm);
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid var(--color-grey-600);
+    resize: vertical;
   }
   

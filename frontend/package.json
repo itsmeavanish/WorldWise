@@ -14,7 +14,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@google/generative-ai": "^0.21.0",
-    "axios": "^1.7.9",
+    "axios": "^1.10.0",
     "framer-motion": "^11.18.2",
     "gsap": "^3.12.7",
     "json-server": "^1.0.0-alpha.23",

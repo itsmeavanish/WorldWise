@@ -126,6 +126,8 @@ function Form() {
           id="notes"
           onChange={(e) => setNotes(e.target.value)}
           value={notes}
+          className={styles.notes}
+          placeholder="Write some notes about your trip..."
         />
       </div>
 

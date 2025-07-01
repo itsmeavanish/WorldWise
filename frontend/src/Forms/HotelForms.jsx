@@ -30,7 +30,7 @@ export default function HotelForms() {
     });
 
   }
-  async function handleSubmit(){
+   function handleSubmit(){
     const tripData={
       destination: formData.destination,
       strength: formData.strength,
@@ -39,16 +39,7 @@ export default function HotelForms() {
       endDate: endDate ? endDate.toISOString().split('T')[0] : null,
       userId: user.userId
     }
-    try{
-      const response =await axios.post(`${BASE_URL}/trips/tripregister`,tripData);
-      const res=response.json();
-      console.log("trip data returned:",res);
-      navigate('/pricing');
-    }
-    catch(err){
-      console.error("Error submitting form:", err);
-    
-  }
+    navigate("/pricing")
   }
   return (
     <>

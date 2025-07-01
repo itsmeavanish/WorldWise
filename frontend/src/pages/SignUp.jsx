@@ -46,6 +46,7 @@ const Signup = () => {
     data.append('profilePhoto', formData.profilePhoto);
 
     try {
+      setLoading(true);
       const response = await axios.post(
         'https://worldwise-backend-iota.vercel.app/api/auth/register',
         data,
@@ -53,11 +54,12 @@ const Signup = () => {
       );
 
       if (response.data) {
-        toast.success('Successfully Signed Up');
+       
         localStorage.setItem('token', response.data.token);
         console.log(response.data);
         login(formData);
-        navigate('/');
+        toast.success('Account created successfully! Welcome aboard!');
+        navigate('/Applayout');
       }
     } catch (e) {
       const errorMessage = e.response?.data?.message || 'An error occurred';

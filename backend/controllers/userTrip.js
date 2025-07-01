@@ -8,22 +8,27 @@ const generateToken = (userId) => {
  const tripregister =async function (req,res) {
     try{
 
-        const {destination,date,Strength,TripType,email}=req.body;
+        const {address,ammenities,description,distance,id,name,priceRange,rating,userId}=req.body;
         if (!req.body){
          console.log("Credentials Empty")
          alert("Credentials Empty");
         }
         const Trip=await Trips.create({
-         destination,
-         Strength,
-         date,
-         TripType,
-         email
+          userId,
+          hotelId:id,
+          address,
+          name,
+          priceRange,
+          ammenities,
+          distance,
+          description,
+          rating,
+          
         })
         if (Trip) {
          res.status(201).json({
            _id: Trip._id,
-           destination: Trip.destination,
+           status:201,
            token:generateToken(Trip._id)
          });
        } else {

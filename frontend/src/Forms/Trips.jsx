@@ -31,9 +31,7 @@ const destinations = [
 ];
 
 export default function Trips() {
-  const {trips,setTrips}=useAuth();
-  
-
+  const {trips}=useAuth();
   return (
     
     <>

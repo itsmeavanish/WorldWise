@@ -2,16 +2,9 @@ import React from "react";
 import { Star, MapPin, Wifi, Coffee, Car, School as Pool, Utensils, Building2, CookingPot, WashingMachine, TreePalm, Mountain, PawPrint } from "lucide-react";
 import "./HotelList.css"; // Import the normal CSS file
 import { useNavigate } from "react-router-dom";
-const imageLink=[
-  "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=1200",
-  "../../public/hotel4.jpeg",
-  "../../public/hotel5.jpg"
-  
-]
-
-
+import axios from "axios";
+import { useAuth } from "../contexts/useAuth";
+import { toast } from "react-toastify";
 const AmenityIcon = ({ type }) => {
   switch (type) {
     case "Free Wifi":
@@ -43,17 +36,52 @@ const AmenityIcon = ({ type }) => {
 };
 
 function HotelList({hotels}) {
-  const navigate=useNavigate();
+   const API_BASE_URL = "http://localhost:4000/";
+   const {user}=useAuth();
   function SubList({hotel}){
-    const { id, name, address,rating, priceRange, amenities,distance } = hotel;
+    const { id, name, address,rating, priceRange, description,amenities,distance,image } = hotel;
+    console.log("Hotels",hotel)
+    async function handleSubmit() {
+    const hotelInfo = {
+        id: hotel.id,
+        name: hotel.name,
+        address: hotel.address,
+        rating: hotel.rating,
+        priceRange: hotel.priceRange,
+        amenities: hotel.amenities,
+        distance: hotel.distance,
+        description: hotel.description,
+        userId: user._id
+    };
 
+    try {
+        const response = await fetch(`${API_BASE_URL}api/auth/trips/tripregister`, {
+            method: "POST",
+            body: JSON.stringify(hotelInfo),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const data = await response.json();
+        if (response.status === 201) {
+            toast.success("Hotel added to your travel list successfully!");
+        } else {
+            const errorMsg = data?.message || "Failed to add hotel to your travel list.";
+            toast.error(errorMsg);
+            console.error("Error adding hotel:", errorMsg);
+        }
+    } catch (error) {
+        console.error("Unexpected error:", error);
+        toast.error("An unexpected error occurred. Please try again later.");
+    } 
+}
     return(
       <div 
       className="hotel-card"
     >
       <div className="hotel-image-container">
         <img 
-          src={imageLink[hotel.id-1]} 
+          src={image} 
           alt={name}
           className="hotel-image"
         />
@@ -71,7 +99,8 @@ function HotelList({hotels}) {
           <MapPin className="map-icon" />
           {address}
         </p>
-        <p className="hotel-description">{distance} from station of city</p>
+        <p className="hotel-location ml-1">{distance} from station of city</p>
+        <p className="hotel-description">{description}</p>
         
         <div className="hotel-amenities">
           {amenities.map((amenity) => (
@@ -87,7 +116,7 @@ function HotelList({hotels}) {
 
         <div className="hotel-footer">
           <span className="hotel-price">{priceRange} $</span>
-          <button className="book-button" onClick={()=>navigate('/trips')}>
+          <button className="book-button" onClick={handleSubmit}>
             Add to Your travel List
           </button>
         </div>

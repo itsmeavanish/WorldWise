@@ -1,9 +1,9 @@
 .hotels-container {
-  min-height: 100vh;
   background-color: #101b2b; /* bg-gray-900 */
   color: #f9fafb; /* text-gray-100 */
-  padding: 2rem; /* p-8 */
+  padding: 3rem; /* p-8 */
   scrollbar-width: none;
+
 }
 
 .hotels-wrapper {
@@ -11,7 +11,6 @@
   margin: 0 auto; /* mx-auto */
   display: flex;
   flex-direction: column;
-  gap: 1rem; 
   
 }
 
@@ -28,6 +27,7 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr); /* grid-cols-1 */
   gap: 2rem; /* gap-8 */
+  padding: 1rem;
 }
 
 @media (min-width: 768px) {
@@ -56,7 +56,7 @@
 
 .hotel-image-container {
   position: relative;
-  height: 16rem; /* h-48 */
+  height: 18rem; /* h-48 */
 }
 
 .hotel-image {
@@ -111,6 +111,7 @@
 }
 
 .hotel-description {
+  font-size: 1.4rem;
   color: #9ca3af; /* text-gray-400 */
   margin-bottom: 1rem; /* mb-4 */
   margin-left: 0.3rem;

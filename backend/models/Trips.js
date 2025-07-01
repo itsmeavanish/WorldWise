@@ -1,24 +1,37 @@
 const mongoose = require("mongoose");
 const bcrypt=require("bcryptjs")
-
 const TripSchema = new mongoose.Schema(
   {
-    destination: {
+    hotelId: {
       type: String,
     },
-    date:{
+    name:{
         type:String,
 
     },
-    Strength:{
+    address:{
         type:String,
     },
-    TripType:{
-        type:String,
+    rating:{
+        type:Number,
     },
-    email:{
+    priceRange: {
+      type: String,
+    },
+    amenities: {
+      type: [String],
+    },
+    distance: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
+    userId:{
       type:String,
+      required:true
     }
+
   },
   {
     timestamps: true, // Automatically creates `createdAt` and `updatedAt` fields
