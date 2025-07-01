@@ -51,4 +51,4 @@ const generateToken = (userId) => {
     res.status(500).json({ message: error.message || "Server error" });
   }
  }
- module.exports={tripregister};
+ module.exports={tripregister,tripfetch};
