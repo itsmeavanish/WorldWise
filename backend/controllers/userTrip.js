@@ -37,4 +37,18 @@ const generateToken = (userId) => {
 
     }
  }
+ const tripfetch=async function(){
+  try{
+    const userId = req.query.userId;
+    const trips=await Trips.find({userId}).sort({createdAt:-1});
+    if (!trips || trips.length === 0) {
+      return res.status(404).json({ message: "No trips found" });
+    }
+    res.status(200).json(trips);
+  }
+  catch(error){
+    console.log(error);
+    res.status(500).json({ message: error.message || "Server error" });
+  }
+ }
  module.exports={tripregister};

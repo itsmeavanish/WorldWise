@@ -1,44 +1,104 @@
 .city {
-    padding: 2rem 3rem;
-    max-height: 70%;
-    border-radius: 7px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  padding: 2rem 3rem;
+  max-height: 70%;
+  border-radius: 7px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: var(--background-color, #fff); /* Optional for contrast */
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.city h6 {
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--color-light--1);
+}
+
+.city h3 {
+  font-size: 1.9rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.city h3 span {
+  font-size: 3.2rem;
+  line-height: 1;
+}
+
+.city p {
+  font-size: 1.6rem;
+}
+
+.city a:link,
+.city a:visited {
+  font-size: 1.6rem;
+  color: var(--color-brand--1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .city {
+    padding: 1.5rem 2rem;
+    max-height: unset; /* Remove max-height restriction on smaller screens */
+    gap: 1.5rem;
   }
-  
-  .row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
+
   .city h6 {
-    text-transform: uppercase;
-    font-size: 1.1rem;
-    font-weight: 900;
-    color: var(--color-light--1);
+    font-size: 1rem;
   }
-  
+
   .city h3 {
-    font-size: 1.9rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .city h3 span {
-    font-size: 3.2rem;
-    line-height: 1;
-  }
-  
-  .city p {
     font-size: 1.6rem;
   }
-  
+
+  .city h3 span {
+    font-size: 2.8rem;
+  }
+
+  .city p {
+    font-size: 1.4rem;
+  }
+
   .city a:link,
   .city a:visited {
-    font-size: 1.6rem;
-    color: var(--color-brand--1);
+    font-size: 1.4rem;
   }
+}
+
+@media (max-width: 480px) {
+  .city {
+    padding: 1rem 1.5rem;
+    flex-direction: column; /* Ensure vertical stacking */
+    gap: 1rem;
+  }
+
+  .city h6 {
+    font-size: 0.9rem;
+  }
+
+  .city h3 {
+    font-size: 1.4rem;
+  }
+
+  .city h3 span {
+    font-size: 2.4rem;
+  }
+
+  .city p {
+    font-size: 1.2rem;
+  }
+
+  .city a:link,
+  .city a:visited {
+    font-size: 1.2rem;
+  }
+}

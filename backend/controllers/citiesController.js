@@ -31,10 +31,8 @@ const addCity = async (req, res) => {
 };
 // Get Cities
 const getCities=async (req, res) => {
-  console.log("hello how are you")
   try {
    const userId = req.query.userId;
-   console.log("userIdwjfh",userId);
 if (!userId) {
             return res.status(400).json({
                 status: "fail",

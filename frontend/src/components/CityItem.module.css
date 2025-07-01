@@ -1,41 +1,64 @@
+/* General City Item Styles */
 .cityItem,
 .cityItem:link,
 .cityItem:visited {
   display: flex;
+  flex-wrap: wrap; /* Ensures items wrap on smaller screens */
   gap: 1.6rem;
   align-items: center;
-
   border-radius: 7px;
   padding: 1rem 2rem;
   border-left: 5px solid var(--color-brand--2);
   cursor: pointer;
-
+  text-align: center;
   color: inherit;
   text-decoration: none;
+  transition: background-color 0.2s, transform 0.2s;
 }
 
+.cityItem:hover {
+  background-color: var(--color-dark--2); /* Highlight on hover */
+  transform: scale(1.01); /* Slight zoom effect */
+}
+
+/* Active State */
 .cityItem--active {
   border: 2px solid var(--color-brand--2);
   border-left: 5px solid var(--color-brand--2);
+  background-color: var(--color-dark--4); /* Subtle background for active state */
 }
 
+/* Emoji Styles */
 .emoji {
   font-size: 2.6rem;
   line-height: 1;
+  flex-shrink: 0; /* Prevent shrinking on smaller screens */
 }
 
+/* Name Section */
 .name {
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   font-weight: 600;
   margin-right: auto;
+  flex: 1; /* Take up available space */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Handle long names */
 }
 
+/* Date Styles */
 .date {
   font-size: 1.5rem;
+  color: var(--color-dark--3); /* Subtle color for secondary info */
 }
 
+/* Delete Button */
 .deleteBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 2rem;
+  width: 2rem;
   aspect-ratio: 1;
   border-radius: 50%;
   border: none;
@@ -44,10 +67,54 @@
   font-size: 1.6rem;
   font-weight: 400;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .deleteBtn:hover {
   background-color: var(--color-brand--1);
   color: var(--color-dark--1);
+  transform: scale(1.1); /* Add a hover effect */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .cityItem {
+    padding: 0.8rem 1.6rem;
+    gap: 1.2rem;
+  }
+
+  .emoji {
+    font-size: 2.2rem;
+  }
+
+  .name {
+    font-size: 1.5rem;
+  }
+
+  .date {
+    font-size: 1.3rem;
+  }
+
+  .deleteBtn {
+    height: 1.8rem;
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cityItem {
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start */
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .name {
+    font-size: 1.4rem;
+    text-align: left; /* Align text to the start */
+  }
+
+  .date {
+    font-size: 1.2rem;
+  }
 }

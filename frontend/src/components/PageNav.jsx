@@ -50,14 +50,13 @@ export default function PageNav() {
             animate={{ opacity: 1, x: 0 }}
             className="nav-links"
           >
-            <a href="features">Features</a>
             
             {isAuthenticated ? (
               <Link to="/" className="cta-button" onClick={()=>window.location("refresh")}>Dashboard</Link>
             ) : (
               <button className="cta-button" onClick={()=>navigate('login')}>Get Started</button>
             )}
-             {isAuthenticated && <NavLink to="/trips">Your Trips</NavLink>}
+           
             {isAuthenticated && <Profile /> }
            
           </motion.div>

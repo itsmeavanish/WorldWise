@@ -12,6 +12,29 @@ const formatDate=(date)=>
     yar:"numeric",
     weekday:"long",
   }).format(new Date(date));
+
+
+  // onvert country code to flag emoji
+
+  function countryCodeToFlag(countryCode) {
+  if (!countryCode || typeof countryCode !== "string") return "";
+
+  // Convert the country code to uppercase for consistency
+  const upperCaseCode = countryCode.toUpperCase();
+
+  // Validate that the input is a 2-character country code
+  if (upperCaseCode.length !== 2) return "";
+
+  // Convert country code characters to regional indicator symbols
+  const offset = 127397; // Unicode offset for regional indicators
+  const flag = upperCaseCode
+    .split("")
+    .map((char) => String.fromCodePoint(char.charCodeAt(0) + offset))
+    .join("");
+
+  return flag;
+}
+
 export default function City() {
     const {id}=useParams();
     const{getCity,currentcity,loading}=useCities();
@@ -20,8 +43,6 @@ export default function City() {
       getCity(id);
     },[id]);
     const {cityName,emoji,date,notes}=currentcity;
-    if(loading) return <Spinner /> 
- 
   return (
     <div className={styles.city} style={{background:"#1F2937"}} >
       <div className={styles.row}>

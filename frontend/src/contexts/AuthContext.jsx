@@ -63,10 +63,33 @@ export default function AuthProvider({ children }) {
       dispatch({ type: "error", payload: err.response?.data?.error || "Failed to fetch user profile" });
     }
   };
-
+    const setTrips = (value) => dispatch({ type: "setTrips", payload: value });
+  const fetchTrips=async()=>{
+    try{
+      const token=getToken();
+      if(!token) throw new Error("No Authntication Token Found and this error is found at AuthContext at fetchTrips function");
+      const response=await fetch(`${API_BASE_URL}api/auth/trips?userId=${user._id}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch trips");
+      }
+      const data = await response.json();
+      if (data && data.length > 0) {
+        setTrips(data);
+        localStorage.setItem("trips", JSON.stringify(data));
+      } else {
+        setTrips([]);
+        localStorage.removeItem("trips");
+      }
+    }
+    catch(error){
+      console.log("Error fetching trips:", error);
+      dispatch({ type: "error", payload: error.response?.data?.error || "Failed to fetch trips" });
+    }
+  }
   useEffect(() => {
     if (isAuthenticated) {
       fetchUserProfile();
+      fetchTrips();
     } else {
       dispatch({ type: "loading", payload: false });
     }
@@ -79,7 +102,7 @@ export default function AuthProvider({ children }) {
     localStorage.removeItem("trips");
     dispatch({ type: "logout" });
   };
-  const setTrips = (value) => dispatch({ type: "setTrips", payload: value });
+
 
   return (
     <Authcontext.Provider

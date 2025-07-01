@@ -31,8 +31,9 @@ const destinations = [
 ];
 
 export default function Trips() {
-  const {trips}=useAuth()
-  console.log("trips are ",trips)
+  const {trips,setTrips}=useAuth();
+  
+
   return (
     
     <>

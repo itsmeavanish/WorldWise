@@ -5,9 +5,15 @@ import { Plane, Users, Calendar, MapPin, Palmtree } from 'lucide-react';
 import DatePicker from "react-datepicker";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/useAuth';
+import PageNav from '../components/PageNav';
+import { useCities } from '../contexts/CitiesContext';
+import axios from 'axios';
 export default function HotelForms() {
+  const BASE_URL = "https://worldwise-backend-iota.vercel.app/api/auth";
   const {trip}=useAuth();
-  const navigate=useNavigate()
+  const navigate=useNavigate();
+  const {currentcity}=useCities();
+  console.log("current city",currentcity)
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [formData,setFormData] =useState({
@@ -15,7 +21,8 @@ export default function HotelForms() {
     strength:"",
     tripType:"",
     date:`${startDate} - ${endDate}`
-  })
+  });
+  const {user}=useAuth();
   function handleChange(e){
     setFormData({
       ...formData,
@@ -23,16 +30,37 @@ export default function HotelForms() {
     });
 
   }
-  function handleSubmit(){
-    navigate('/pricing')
+  async function handleSubmit(){
+    const tripData={
+      destination: formData.destination,
+      strength: formData.strength,
+      tripType: formData.tripType,
+      startDate: startDate ? startDate.toISOString().split('T')[0] : null,
+      endDate: endDate ? endDate.toISOString().split('T')[0] : null,
+      userId: user.userId
+    }
+    try{
+      const response =await axios.post(`${BASE_URL}/trips/tripregister`,tripData);
+      const res=response.json();
+      console.log("trip data returned:",res);
+      navigate('/pricing');
+    }
+    catch(err){
+      console.error("Error submitting form:", err);
+    
   }
-
+  }
   return (
+    <>
+    
     <motion.div 
     initial={{ opacity:0,x:700}}
     animate={{opacity:1,x:0}}
     transition={{duration:1}}
     className=" text-2xl min-h-screen min-w-full bg-gray-900 flex items-center justify-center  z-50 absolute top-0 overflow-hidden">
+      <span className='fixed left-0 top-0'>
+        <PageNav />
+      </span>
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -56,12 +84,12 @@ export default function HotelForms() {
                 Destination
               </div>
               <input
-              name='destination' 
+                name='destination' 
                 type="text"
                 className="w-full px-4 py-3 bg-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 text-white placeholder-gray-400"
                 placeholder="Where do you want to go?"
-                value={formData.destination}
                 onChange={handleChange}
+                defaultValue={currentcity.cityName}
               />
             </label>
           </motion.div>
@@ -142,8 +170,8 @@ export default function HotelForms() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {['Beach', 'Mountain', 'City', 'Adventure'].map((type) => (
-                  <label key={type} className="flex items-center space-x-2 cursor-pointer">
-                    <input  type="radio" name="tripType" onChange={handleChange} className="form-radio text-purple-500" />
+                  <label key={type} className="flex items-center space-x-2 cursor-pointer" >
+                    <input  type="radio" name="tripType" onChange={handleChange} className="form-radio text-purple-500 " />
                     <span className="text-white">{type}</span>
                   </label>
                 ))}
@@ -161,5 +189,6 @@ export default function HotelForms() {
         </form>
       </motion.div>
     </motion.div>
+    </>
   )  
 }
