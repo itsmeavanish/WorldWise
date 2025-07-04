@@ -8,12 +8,11 @@ import { useAuth } from '../contexts/useAuth';
 import PageNav from '../components/PageNav';
 import { useCities } from '../contexts/CitiesContext';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 export default function HotelForms() {
   const BASE_URL = "https://worldwise-backend-iota.vercel.app/api/auth";
-  const {trip}=useAuth();
   const navigate=useNavigate();
   const {currentcity}=useCities();
-  console.log("current city",currentcity)
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [formData,setFormData] =useState({
@@ -22,6 +21,7 @@ export default function HotelForms() {
     tripType:"",
     date:`${startDate} - ${endDate}`
   });
+  const [loading,setloading]=useState(false);
   const {user}=useAuth();
   function handleChange(e){
     setFormData({
@@ -30,17 +30,26 @@ export default function HotelForms() {
     });
 
   }
-   function handleSubmit(){
-    const tripData={
-      destination: formData.destination,
+  const API=process.env.API_BASE_URL ;
+    async function handleSubmit(){
+      const tripData={
+      city: formData.destination,
       strength: formData.strength,
       tripType: formData.tripType,
       startDate: startDate ? startDate.toISOString().split('T')[0] : null,
       endDate: endDate ? endDate.toISOString().split('T')[0] : null,
       userId: user.userId
     }
-    navigate("/pricing")
-  }
+        try {
+            const response =await axios.post(`${API}tripplan/firebase`,tripData);
+            console.log("Trip data submitted successfully:", response.data);
+           toast.success("Trip planned successfully!");
+           navigate("/trips");
+        } catch (error) {
+            console.error("Error fetching trip:", error);
+            
+        }
+    }
   return (
     <>
     

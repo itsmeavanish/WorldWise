@@ -2,6 +2,7 @@
   "dependencies": {
     "@cloudinary/react": "^1.13.1",
     "@cloudinary/url-gen": "^1.21.0",
+    "@google/generative-ai": "^0.24.1",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.5.1",
     "cookie-parser": "^1.4.7",
@@ -9,6 +10,7 @@
     "dotenv": "^16.5.0",
     "express": "^4.21.2",
     "express-fileupload": "^1.5.1",
+    "firebase-admin": "^13.4.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.2",
     "postman": "^0.2.0"

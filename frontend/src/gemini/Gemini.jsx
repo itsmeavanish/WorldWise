@@ -7,6 +7,10 @@ import Spinner from '../components/Spinner';
 import PageNav from '../components/PageNav';
 import styles from "./Gemini.module.css";
 import HotelList from './SubHotelList';
+import TripDetails from './TripDetails';
+import TripManager from '../Trip-Supabase/trips';
+import { useAuth } from '../contexts/useAuth';
+
 
 export default function Gemini() {
   const genAI = useMemo(
@@ -14,7 +18,7 @@ export default function Gemini() {
     []
   );
   const model = useMemo(() => genAI.getGenerativeModel({ model: "gemini-2.5-flash" }), [genAI]);
-
+  const {user}=useAuth();
   const [state, setState] = useState({
     hotels: [],
     loading: true,
@@ -25,7 +29,8 @@ export default function Gemini() {
   const { cityName } = currentcity;
 
 async function fetchImage(query) {
-  const API_KEY = "AIzaSyAZMct82vtqnF0cbj6oWWelCBfHbI1QfoE";
+  const API_KEY1 = "AIzaSyAALm-uGStRBFII7gU2QB-xJ_m7ERYmQF8";
+  const API_KEY = "AIzaSyCeuJWAwNPnhh0mflQkltpjiKwLsivN-dU";
   const CX = "613aebe8e8d6f4898";
   const url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&searchType=image&key=${API_KEY}&cx=${CX}`;
 
@@ -153,6 +158,7 @@ Please provide the response in the following JSON format:
       .replace(/[^}\]]+$/, "") // Remove post-JSON text
       .trim();
     const data=JSON.parse(cleanResponse);
+    console.log("Parsed data:", data);
    const imageFetchPromises = [];
     for (const day of data.itinerary) {
       for (const place of day.placesToVisit) {
@@ -196,7 +202,8 @@ Please provide the response in the following JSON format:
         <div className={styles.error}>Error: {error}</div>
       ) : (
         <span className='relative w-full h-fit top-36 left-0 p bg-rgba(15, 23, 42, 0.8)  '>
-
+          <TripDetails />
+          <TripManager userId={user._id}/>
           <HotelList hotels={hotels} />
         </span>
       )}

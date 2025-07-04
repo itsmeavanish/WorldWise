@@ -47,12 +47,12 @@ const Upload = require("./routes/FileUpload");
 const authRoutes = require("./routes/userRoute");
 const TripRoutes = require("./routes/TripPlanner");
 const CityRoutes=require("./routes/cityroute");
-
+const tripfirebaseRoutes = require("./routes/trips");
 app.use('/api/auth', authRoutes);
 app.use('/api/auth/upload', Upload);
 app.use('/api/auth/trips', TripRoutes);
 app.use('/api/auth/city',CityRoutes);
-
+app.use('/api/auth', tripfirebaseRoutes);;
 //activating server
 app.listen(PORT,()=>{
     console.log(`App is running at ${PORT}`)

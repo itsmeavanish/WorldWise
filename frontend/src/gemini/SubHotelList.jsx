@@ -1,8 +1,7 @@
 import React from "react";
 import { Star, MapPin, Wifi, Coffee, Car, School as Pool, Utensils, Building2, CookingPot, WashingMachine, TreePalm, Mountain, PawPrint } from "lucide-react";
 import "./HotelList.css"; // Import the normal CSS file
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 import { useAuth } from "../contexts/useAuth";
 import { toast } from "react-toastify";
 const AmenityIcon = ({ type }) => {

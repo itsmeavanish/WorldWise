@@ -16,6 +16,7 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import Features from "./pages/Features";
 import HotelForms from "./Forms/HotelForms";
 import Trips from "./Forms/Trips";
+import Tripfetch from "./Trip-Fetching-Firebase/tripfetch";
 const HomePage=lazy(()=>import("./pages/Homepage"));
 const AppLayout=lazy(()=>import("./pages/AppLayout"));
 const PagenotFound=lazy(()=>import("./pages/PagenotFound"));
@@ -33,7 +34,7 @@ export default function App() {
               <Route path="signup" element={<Signup />} />
               <Route path="*" element={<PagenotFound />} />
               <Route path="features" element={<Features />} />
-                <Route path="pricing" element={<ProtectedRoute><Gemini /></ProtectedRoute>} />
+                <Route path="trips" element={<ProtectedRoute><Tripfetch /></ProtectedRoute>} />
                 <Route path="hotelform" element={<HotelForms />} />
                 <Route  path="trips" element={<Trips /> } />
               <Route
