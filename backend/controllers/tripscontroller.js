@@ -2,7 +2,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { db, bucket, FieldValue } = require("../firebase/firebaseConfig");
 const { v4: uuidv4 } = require("uuid");
 const fetch = require("node-fetch");
-
+const axios = require('axios');
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Fetch image from Google Custom Search
@@ -199,6 +199,83 @@ async function generateAndStoreTrip(cityName, strength, tripType, startDate, end
   }
 }
 
+
+
+async function fetchTripsByUserId(req, res) {
+  const { userId } = req.query;
+  if (!userId) {
+    return res.status(400).json({ success: false, message: 'Missing userId' });
+  }
+
+  try {
+    const [files] = await bucket.getFiles({ prefix: 'trip-plans/' });
+    const matchingTrips = [];
+
+    for (const file of files) {
+      if (!file.name.endsWith('.json')) continue;
+
+      try {
+        const [url] = await file.getSignedUrl({
+          action: 'read',
+          expires: Date.now() + 10 * 60 * 1000, // 10 minutes
+        });
+
+        const response = await axios.get(url);
+        const data = response.data;
+
+        if (data?.metadata?.userId === userId) {
+          matchingTrips.push({
+            id: file.name,
+            trip: data.trip,
+            metadata: data.metadata,
+          });
+        }
+      } catch (axiosError) {
+        console.warn(`Could not fetch or parse file ${file.name}:`, axiosError.message);
+        continue; // skip this file
+      }
+    }
+
+    return res.json({ success: true, trips: matchingTrips });
+  } catch (err) {
+    console.error('Error fetching trips:', err);
+    return res.status(500).json({ success: false, message: 'Server error while fetching trips' });
+  }
+}
+
+async function listFilesUnderPrefix(prefix) {
+  try {
+    console.log(`Attempting to list files under prefix: '${prefix}' in Storage...`);
+
+   const [files] = await bucket.getFiles({
+      prefix: prefix
+    });
+
+    const fileDetails = files.map(file => {
+      return {
+        name: file.name, // The full path of the file in Storage (e.g., 'trip-plans/my-photo.jpg')
+        bucket: file.bucket.name, // The name of the storage bucket
+        contentType: file.metadata.contentType, // The MIME type of the file
+        size: file.metadata.size, // File size in bytes
+        updated: file.metadata.updated, // Last updated timestamp
+        // You can generate a public URL if the file is publicly accessible.
+        // Be cautious with public URLs for private user data.
+        // publicUrl: `https://storage.googleapis.com/${file.bucket.name}/${file.name}`
+      };
+    });
+
+    console.log(`Successfully found ${fileDetails.length} files under '${prefix}'.`);
+    return fileDetails;
+
+  } catch (error) {
+    console.error(`Error listing files under prefix '${prefix}':`, error);
+    throw new Error('Failed to list files from Firebase Storage.');
+  }
+}
+
+
+
 module.exports = {
   generateAndStoreTrip,
+  listFilesUnderPrefix
 };

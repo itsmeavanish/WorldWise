@@ -1,7 +1,7 @@
 const express = require("express");
-const { generateAndStoreTrip } = require("../controllers/tripscontroller");
+const { generateAndStoreTrip, listFilesUnderPrefix } = require("../controllers/tripscontroller");
 const { db, bucket } = require("../firebase/firebaseConfig"); // ✅ required
-
+const targetPrefix = 'trip-plans/';
 const router = express.Router();
 
 // POST - Generate & Save Trip
@@ -60,6 +60,23 @@ router.get("/tripplan/firebase", async (req, res) => {
     console.error("Error fetching trip:", err);
     res.status(500).json({ error: "Failed to fetch trip." });
   }
+});
+
+router.get('/trips/all',async(req,res)=>{
+  listFilesUnderPrefix(targetPrefix)
+  .then(files => {
+    console.log('\n--- Details of Files Found ---');
+    if (files.length === 0) {
+      console.log(`No files found under '${targetPrefix}'.`);
+    } else {
+      files.forEach(file => {
+        console.log(`- Name: ${file.name}, Size: ${file.size} bytes, Type: ${file.contentType}`);
+      });
+    }
+  })
+  .catch(error => {
+    console.error('An error occurred during execution:', error.message);
+  });
 });
 
 module.exports = router;
