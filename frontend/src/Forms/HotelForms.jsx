@@ -11,7 +11,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 export default function HotelForms() {
-  const BASE_URL = "http://localhost:4000/api/auth";
+  const BASE_URL = "https://worldwise-backend-iota.vercel.app/api/auth";
   const navigate = useNavigate();
   const { currentcity } = useCities();
   const { user } = useAuth();

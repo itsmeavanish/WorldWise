@@ -13,7 +13,7 @@ export default function Tripdetails() {
   const API = "https://worldwise-backend-iota.vercel.app/api/auth/";
   async function fetchTrips() {
     try {
-      if(trips?.metadata.city!==currentcity.cityName){
+      if(trips?.metadata?.city!==currentcity.cityName){
       const response = await axios.get(`${API}tripplan/firebase?userId=${user._id}&city=${currentcity.cityName}`);
       console.log("Fetched trip data:", response.data);
       setTrips(response.data)}
