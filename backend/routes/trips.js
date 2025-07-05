@@ -7,7 +7,7 @@ const router = express.Router();
 // POST - Generate & Save Trip
 router.post("/tripplan/firebase", async (req, res) => {
   const { cityName,trripType,strength,startDate,endDate, userId } = req.body;
-
+  console.log("Received trip data:", req.body);
   if (!cityName || !userId) {
     return res.status(400).json({ error: "Missing cityName or userId" });
   }

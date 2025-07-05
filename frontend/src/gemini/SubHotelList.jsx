@@ -39,41 +39,7 @@ function HotelList({hotels}) {
    const {user}=useAuth();
   function SubList({hotel}){
     const { id, name, address,rating, priceRange, description,amenities,distance,image } = hotel;
-    console.log("Hotels",hotel)
-    async function handleSubmit() {
-    const hotelInfo = {
-        id: hotel.id,
-        name: hotel.name,
-        address: hotel.address,
-        rating: hotel.rating,
-        priceRange: hotel.priceRange,
-        amenities: hotel.amenities,
-        distance: hotel.distance,
-        description: hotel.description,
-        userId: user._id
-    };
-
-    try {
-        const response = await fetch(`${API_BASE_URL}api/auth/trips/tripregister`, {
-            method: "POST",
-            body: JSON.stringify(hotelInfo),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        const data = await response.json();
-        if (response.status === 201) {
-            toast.success("Hotel added to your travel list successfully!");
-        } else {
-            const errorMsg = data?.message || "Failed to add hotel to your travel list.";
-            toast.error(errorMsg);
-            console.error("Error adding hotel:", errorMsg);
-        }
-    } catch (error) {
-        console.error("Unexpected error:", error);
-        toast.error("An unexpected error occurred. Please try again later.");
-    } 
-}
+   
     return(
       <div 
       className="hotel-card"
@@ -115,7 +81,7 @@ function HotelList({hotels}) {
 
         <div className="hotel-footer">
           <span className="hotel-price">{priceRange} $</span>
-          <button className="book-button" onClick={handleSubmit}>
+          <button className="book-button" >
             Add to Your travel List
           </button>
         </div>

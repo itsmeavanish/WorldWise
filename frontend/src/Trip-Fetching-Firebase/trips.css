@@ -1,0 +1,678 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+/*body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: #f8fafc;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 40px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+*/
+/* Elegant Header */
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 50%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -2px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.header p {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+
+/* Modern Filter Buttons */
+.filter-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+  font-size: 1.3rem;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 8px;
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  font-size: 1.3rem;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  color: #94a3b8;
+  font-weight: 500;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-btn:hover {
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Content Container */
+.content-container {
+  background: rgba(15, 23, 42, 0.4);
+  border-radius: 24px;
+  padding: 40px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 32px;
+}
+
+/* Hotel Cards */
+.hotel-card {
+  background: rgba(30, 41, 59, 0.6);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.hotel-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.hotel-image {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.hotel-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.hotel-card:hover .hotel-image img {
+  transform: scale(1.05);
+}
+
+.rating-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 8px 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star-icon {
+  width: 14px;
+  height: 14px;
+  fill: #fbbf24;
+  color: #fbbf24;
+}
+
+.rating-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.hotel-content {
+  padding: 24px;
+}
+
+.hotel-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #f1f5f9;
+  line-height: 1.3;
+}
+
+.hotel-location {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: #94a3b8;
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+}
+
+.location-icon {
+  width: 16px;
+  height: 16px;
+  color: #3b82f6;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.hotel-description {
+  color: #cbd5e1;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-size: 1.3rem;
+}
+
+.amenities h4 {
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #f1f5f9;
+  font-size: 1.3rem;
+}
+
+.amenities-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.2rem;
+  color: #94a3b8;
+  padding: 8px 12px;
+  background: rgba(51, 65, 85, 0.4);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.amenity-item:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.amenity-icon {
+  width: 14px;
+  height: 14px;
+  color: #3b82f6;
+}
+
+/* Itinerary Cards */
+.itinerary-card {
+  background: rgba(30, 41, 59, 0.6);
+  border-radius: 20px;
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.itinerary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.day-icon {
+  width: 30px;
+  height: 30px;
+  color: #3b82f6;
+}
+
+.day-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.event-item {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: rgba(51, 65, 85, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border-left: 3px solid #3b82f6;
+  transition: all 0.3s ease;
+}
+
+.event-item:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.2);
+  transform: translateX(4px);
+}
+
+.event-time {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #94a3b8;
+  font-weight: 500;
+  min-width: 140px;
+  font-size: 0.875rem;
+}
+
+.time-icon {
+  width: 16px;
+  height: 16px;
+  color: #3b82f6;
+}
+
+.event-content h4 {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #f1f5f9;
+  font-size: 1.1rem;
+}
+
+.event-content p {
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+}
+
+.travel-tips {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: #86efac;
+  border-left: 3px solid #22c55e;
+}
+
+/* Must Visit Cards */
+.must-visit-card {
+  background: rgba(30, 41, 59, 0.6);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.must-visit-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.place-image {
+  height: 220px;
+  overflow: hidden;
+}
+
+.place-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.must-visit-card:hover .place-image img {
+  transform: scale(1.05);
+}
+
+.place-content {
+  padding: 24px;
+}
+
+.place-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.375rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #f1f5f9;
+  line-height: 1.3;
+}
+
+.place-reason {
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+}
+
+.visit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+}
+
+.badge-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Recommendations */
+.recommendations-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 32px;
+}
+
+.recommendation-section {
+  background: rgba(30, 41, 59, 0.6);
+  padding: 28px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.recommendation-section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.recommendation-section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #f1f5f9;
+  border-bottom: 2px solid #3b82f6;
+  padding-bottom: 12px;
+}
+
+.recommendation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.recommendation-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(51, 65, 85, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border-left: 3px solid #3b82f6;
+  transition: all 0.3s ease;
+}
+
+.recommendation-item:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.2);
+  transform: translateX(4px);
+}
+
+.rec-icon {
+  width: 18px;
+  height: 18px;
+  color: #3b82f6;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.recommendation-item span {
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app {
+    padding: 20px 16px;
+  }
+  
+  .header h1 {
+    font-size: 3rem;
+  }
+  
+  .filter-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .filter-btn {
+    justify-content: center;
+  }
+  
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .recommendations-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .content-container {
+    padding: 24px;
+  }
+  
+  .amenities-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .event-item {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .event-time {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .header p {
+    font-size: 1.125rem;
+  }
+  
+  .filter-btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .hotel-content,
+  .place-content,
+  .itinerary-card {
+    padding: 20px;
+  }
+  
+  .recommendation-section {
+    padding: 20px;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+}
+/* Existing styles remain untouched */
+
+/* --- Weather Precautions Section --- */
+.weather-alert {
+  background: rgba(234, 179, 8, 0.1);
+  border-left: 4px solid #facc15;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  box-shadow: 0 8px 24px rgba(234, 179, 8, 0.2);
+}
+
+.weather-alert h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fcd34d;
+  margin-bottom: 8px;
+}
+
+.weather-alert p {
+  font-size: 0.95rem;
+  color: #fef9c3;
+  line-height: 1.6;
+}
+
+/* --- New Itinerary Enhancements --- */
+.best-times {
+  background: rgba(100, 116, 139, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #cbd5e1;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.best-times ul {
+  margin-top: 8px;
+  list-style: none;
+  padding-left: 0;
+}
+
+.best-times li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.event-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Expanded Recommendations --- */
+.recommendation-section ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  color: #cbd5e1;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 12px;
+}
+
+.recommendation-section ul li {
+  margin-bottom: 8px;
+}
+
+.recommendation-section h4 {
+  color: #f8fafc;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-left: 3px solid #3b82f6;
+  padding-left: 10px;
+}

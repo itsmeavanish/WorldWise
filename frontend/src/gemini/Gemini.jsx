@@ -8,7 +8,6 @@ import PageNav from '../components/PageNav';
 import styles from "./Gemini.module.css";
 import HotelList from './SubHotelList';
 import TripDetails from './TripDetails';
-import TripManager from '../Trip-Supabase/trips';
 import { useAuth } from '../contexts/useAuth';
 
 
@@ -203,7 +202,6 @@ Please provide the response in the following JSON format:
       ) : (
         <span className='relative w-full h-fit top-36 left-0 p bg-rgba(15, 23, 42, 0.8)  '>
           <TripDetails />
-          <TripManager userId={user._id}/>
           <HotelList hotels={hotels} />
         </span>
       )}

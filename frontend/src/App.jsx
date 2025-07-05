@@ -11,12 +11,12 @@ import Spinner from "./components/Spinner";
 import Signup from "./pages/SignUp";
 import { ToastContainer } from "react-toastify";
 import AuthProvider from "./contexts/AuthContext";
-import Gemini from "./gemini/Gemini";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import Features from "./pages/Features";
 import HotelForms from "./Forms/HotelForms";
-import Trips from "./Forms/Trips";
-import Tripfetch from "./Trip-Fetching-Firebase/tripfetch";
+
+import Trip from "./pages/Trip";
+import TravelLoadingAnimation from "./Trip-Fetching-Firebase/TravelLoadingAnimation";
 const HomePage=lazy(()=>import("./pages/Homepage"));
 const AppLayout=lazy(()=>import("./pages/AppLayout"));
 const PagenotFound=lazy(()=>import("./pages/PagenotFound"));
@@ -34,9 +34,10 @@ export default function App() {
               <Route path="signup" element={<Signup />} />
               <Route path="*" element={<PagenotFound />} />
               <Route path="features" element={<Features />} />
-                <Route path="trips" element={<ProtectedRoute><Tripfetch /></ProtectedRoute>} />
+                <Route path="trips" element={<ProtectedRoute><Trip /></ProtectedRoute>} />
                 <Route path="hotelform" element={<HotelForms />} />
-                <Route  path="trips" element={<Trips /> } />
+                <Route path="loading" element={<TravelLoadingAnimation />} />
+
               <Route
                 path="Applayout"
                 element={
@@ -52,7 +53,7 @@ export default function App() {
                 <Route path="cities/:id" element={<City />} />
                 <Route path="countries" element={<Country />} />
                 <Route path="form" element={<Form />} />
-
+                
               </Route>
             </Routes>
         </Suspense>

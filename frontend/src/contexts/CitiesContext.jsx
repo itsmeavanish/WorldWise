@@ -3,12 +3,12 @@ import { useAuth } from "./useAuth";
 
 
 const BASE_URL = "https://worldwise-backend-iota.vercel.app/api/auth";
-
+const getcurrentCity = () =>JSON.parse(localStorage.getItem("currentcity")) || {};
 const CitiesContext = createContext();
 const cityState = {
   cities:[],
   loading:false,
-  currentcity:{}
+  currentcity:getcurrentCity(),
 };
 function reducer(state,action){
   switch(action.type){
@@ -17,6 +17,7 @@ function reducer(state,action){
     case "setLoading":
     return{...state,loading:action.payload}
     case "setCurrentCity":
+      localStorage.setItem("currentcity", JSON.stringify(action.payload));
     return{...state,currentcity:action.payload}
     default:
       throw new Error(`Unknown action type: ${action.type}`);
@@ -45,7 +46,9 @@ function reducer(state,action){
           dispatch({type:"setLoading",payload:false});
         }
       }
+      if(user){
       fetchCities();
+    }
     },[userId]);
     async function getCity(id){
 

@@ -4,9 +4,16 @@ import axios from "axios";
 const Authcontext = createContext();
 
 const getToken = () => localStorage.getItem("token");
-const getUser = () => JSON.parse(localStorage.getItem("user")) || null;
-const getTrips = () =>(localStorage.getItem("trips")) || [];
-
+const getUser = () => {
+  try {
+    const item = localStorage.getItem("user");
+    return item ? JSON.parse(item) : null;
+  } catch (error) {
+    console.error("Failed to parse user from localStorage:", error);
+    return null;
+  }
+};
+const getTrips = () =>JSON.parse(localStorage.getItem("trips")) || [];
 const initialState = {
   user: getUser(),
   isAuthenticated: !!getToken(),
