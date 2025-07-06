@@ -15,13 +15,18 @@ const getUser = () => {
     return null;
   }
 };
+const getSavedTrips=()=>
+  JSON.parse(localStorage.getItem("savedTrips")) || [];
+
 const getTrips = () =>JSON.parse(localStorage.getItem("trips")) || [];
 const initialState = {
   user: getUser(),
   isAuthenticated: !!getToken(),
   loading: false,
   error: null,
+  savedTrips:getSavedTrips(),
   trips: getTrips(),
+  
 };
 
 function reducer(state, action) {
@@ -37,6 +42,9 @@ function reducer(state, action) {
     case "setTrips":
       localStorage.setItem("trips", JSON.stringify(action.payload));
       return { ...state, trips: action.payload };
+      case "setSavedTrips":
+      localStorage.setItem("savedTrips", JSON.stringify(action.payload));
+      return { ...state, savedTrips: action.payload };
     case "setUser":
       localStorage.setItem("user", JSON.stringify(action.payload));
       return {
@@ -53,7 +61,7 @@ function reducer(state, action) {
 
 export default function AuthProvider({ children }) {
   const API_BASE_URL = "https://worldwise-backend-iota.vercel.app/";
-  const [{ user, isAuthenticated, loading, error, trips }, dispatch] = useReducer(reducer, initialState);
+  const [{ user, isAuthenticated, loading, error,savedTrips ,trips }, dispatch] = useReducer(reducer, initialState);
   
   const fetchUserProfile = async () => {
     try {
@@ -71,6 +79,7 @@ export default function AuthProvider({ children }) {
       dispatch({ type: "error", payload: err.response?.data?.error || "Failed to fetch user profile" });
     }
   };
+  const setSavedTrips=(value)=>dispatch({type:"setSavedTrips",payload:value});
     const setTrips = (value) => dispatch({ type: "setTrips", payload: value });
     const setLoading=(value)=>dispatch({type:"loading",payload:value});
   const fetchTrips=async()=>{
@@ -122,6 +131,17 @@ export default function AuthProvider({ children }) {
       toast.error("Failed to save trip.");
     }
   }
+  const fetchSavedTrips=async()=>{
+    try{
+      const response =await axios.get(`${API_BASE_URL}api/auth/trips/fetch?userId=${user._id}`);
+      setSavedTrips(response.data);
+      console.log("Saved trips fetched successfully:", response.data);
+    }
+    catch(error){
+      console.error("Error fetching saved trips:", error);
+      toast.error("Failed to fetch saved trips.");
+    }
+  }
   const createTrip=async(tripData)=>{
     console.log(tripData)
     try {
@@ -167,12 +187,14 @@ export default function AuthProvider({ children }) {
         loading,
         error,
         trips,
+        savedTrips,
         login,
         logout,
         setTrips,
         saveTrip,
         createTrip,
         setLoading,
+        fetchSavedTrips,
         fetchTripbyUser,
         fetchTrip,
       }}>

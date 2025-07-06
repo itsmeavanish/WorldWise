@@ -3,13 +3,13 @@ import PageNav from '../components/PageNav'
 import styles from "./Trips.module.css"
 import { useAuth } from '../contexts/useAuth'
 import { MapPin, Star } from 'lucide-react'
-/*export default function Trips() {
-  const {fetchTripbyUser}=useAuth()
+export default function Trips() {
+  const {savedTrips,fetchSavedTrips}=useAuth()
   useEffect(()=>{
-    const trips=fetchTripbyUser();
+    fetchSavedTrips();
     console.log("All fetched trips",trips)
-  },[])
-
+  },[]);
+  const {destination,strength,startDate,endDate,budget,tripType}=savedTrips;
   return (
     <div className={styles.gemini}>
       <div className={styles.header}>
@@ -20,7 +20,7 @@ import { MapPin, Star } from 'lucide-react'
               <div className={styles.wrapper}>
                   <h1 className={styles.title}>Enjoy Your Trips</h1>
                   <div className={styles.grid}>
-                    
+                    <SubTrips savedTrips={savedTrips} />
                   </div>
                 </div>
             </div>
@@ -28,42 +28,41 @@ import { MapPin, Star } from 'lucide-react'
     </div>
   )
 }
-function SubTrips(){
+function SubTrips({savedTrips}){
+const {destination,strength,startDate,endDate,budget,tripType}=savedTrips;
   <div 
-      className="hotel-card"
+      className={styles.card}
     >
-      <div className="hotel-image-container">
+      <div className={styles.imagecontainer}>
         <img 
-          src={image} 
-          alt={name}
-          className="hotel-image"
+          src=""
+          alt={destination}
+          className={styles.image}
         />
-        <div className="hotel-rating">
-          <span className="rating-content">
-            <Star className="star-icon" />
-            {rating}
+        <div className={styles.rating}>
+          <span className={styles.ratingcontent}>
+            <Star className={styles.starticon} />
+            {budget} budget
           </span>
         </div>
       </div>
 
-      <div className="hotel-details">
-        <h2 className="hotel-name">{hotel.name}</h2>
-        <p className="hotel-location">
-          <MapPin className="map-icon" />
-          {address}
+      <div className={styles.details}>
+        <h2 className={styles.name}>{destination}</h2>
+        <p className={styles.location}>
+          <MapPin className={styles.mapicon} />
+          {strength} strength
         </p>
-        <p className="hotel-location ml-1">{distance} from station of city</p>
-        <p className="hotel-description">{description}</p>
+        <p className={styles.description}>{startDate} to {endDate}</p>
         
         
 
-        <div className="hotel-footer">
-          <span className="hotel-price">{priceRange} $</span>
-          <button className="book-button" >
+        <div className={styles.footer}>
+          <span className={styles.price}>{budget} budget</span>
+          <button className={styles.bookbutton}>
             Open Your Trip
           </button>
         </div>
       </div>
     </div>
 }
-*/

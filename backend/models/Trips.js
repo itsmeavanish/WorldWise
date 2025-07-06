@@ -2,29 +2,24 @@ const mongoose = require("mongoose");
 const bcrypt=require("bcryptjs")
 const TripSchema = new mongoose.Schema(
   {
-    hotelId: {
+    destination: {
       type: String,
     },
-    name:{
+    strength:{
         type:String,
 
     },
-    address:{
+    budget:{
         type:String,
     },
-    rating:{
+    startDate:{
         type:Number,
     },
-    priceRange: {
+    endDate: {
       type: String,
     },
-    amenities: {
-      type: [String],
-    },
-    distance: {
-      type: String,
-    },
-    description: {
+    
+    tripType: {
       type: String,
     },
     userId:{

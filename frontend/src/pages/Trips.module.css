@@ -83,7 +83,7 @@ gap: 10rem;
   transform: scale(1.05); /* hover:scale-105 */
 }
 
-.image-container {
+.imagecontainer {
   position: relative;
   height: 18rem; /* h-48 */
 }
@@ -103,13 +103,13 @@ gap: 10rem;
   border-radius: 9999px; /* rounded-full */
 }
 
-.rating-content {
+.ratingcontent {
   display: flex;
   align-items: center;
   gap: 0.25rem; /* gap-1 */
 }
 
-.star-icon {
+.staricon {
   width: 1rem; /* w-4 */
   height: 1rem; /* h-4 */
   color: #fbbf24; /* text-yellow-400 */
@@ -134,7 +134,7 @@ gap: 10rem;
   margin-bottom: 1rem; /* mb-4 */
 }
 
-.map-icon {
+.mapicon {
   width: 1.6rem; /* w-4 */
   height: 1.6rem; /* h-4 */
 }
@@ -153,7 +153,7 @@ gap: 10rem;
   margin-bottom: 1.5rem; /* mb-6 */
 }
 
-.amenity-icon {
+.amenityicon {
   color: #a855f7; /* text-purple-400 */
 }
 
