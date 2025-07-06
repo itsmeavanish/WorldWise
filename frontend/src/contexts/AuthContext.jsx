@@ -1,5 +1,7 @@
 import { createContext, useReducer, useEffect } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { redirect, useNavigate } from "react-router-dom";
 
 const Authcontext = createContext();
 
@@ -17,7 +19,7 @@ const getTrips = () =>JSON.parse(localStorage.getItem("trips")) || [];
 const initialState = {
   user: getUser(),
   isAuthenticated: !!getToken(),
-  loading: true,
+  loading: false,
   error: null,
   trips: getTrips(),
 };
@@ -51,9 +53,8 @@ function reducer(state, action) {
 
 export default function AuthProvider({ children }) {
   const API_BASE_URL = "https://worldwise-backend-iota.vercel.app/";
-
   const [{ user, isAuthenticated, loading, error, trips }, dispatch] = useReducer(reducer, initialState);
-
+  
   const fetchUserProfile = async () => {
     try {
       dispatch({ type: "loading" });
@@ -71,6 +72,7 @@ export default function AuthProvider({ children }) {
     }
   };
     const setTrips = (value) => dispatch({ type: "setTrips", payload: value });
+    const setLoading=(value)=>dispatch({type:"loading",payload:value});
   const fetchTrips=async()=>{
     try{
       const token=getToken();
@@ -109,8 +111,54 @@ export default function AuthProvider({ children }) {
     localStorage.removeItem("trips");
     dispatch({ type: "logout" });
   };
+  const saveTrip=async(tripData)=>{
+    try{
+      const response=await axios.post(`${API_BASE_URL}api/auth/trips/tripregister`,tripData);
+      console.log("Trip saved successfully",response.data);
+      toast.success("Trip saved successfully!");
+    }
+    catch(error){
+      console.error("Error saving trip:", error);
+      toast.error("Failed to save trip.");
+    }
+  }
+  const createTrip=async(tripData)=>{
+    console.log(tripData)
+    try {
+       
+      const response = await axios.post(`${API_BASE_URL}api/auth/tripplan/firebase`, tripData);
+      saveTrip(tripData)
+      toast.success("Trip planned successfully!");
+      window.location.href="/tripplan"
+    } catch (error) {
+      console.error("Error fetching trip:", error);
+      toast.error("Trip planning failed.");
+    } finally {
+      setLoading(false);
+    }
+  }
+  const fetchTripbyUser=async()=>{
+    try {
+      const response=await axios.get(`http://localhost:4000/api/auth/trips/all?userId=${user._id}`);
 
-
+      console.log("Trips Response",response);
+    } catch (error) {
+      toast.error("Error in Loading your Trips");
+      console.log(error);
+    }
+  }
+  const fetchTrip=async(currentcity)=>{
+    try {
+          if(trips?.metadata?.city!==currentcity?.cityName){
+          const response = await axios.get(`${API_BASE_URL}api/auth/tripplan/firebase?userId=${user._id}&city=${currentcity.cityName}`);
+          console.log("Fetched trip data:", response.data);
+          setTrips(response.data)}
+    
+        } catch (error) {
+          toast.error("Error fetching trip data: " + error.message);
+          console.error("Error fetching trip data:", error);
+        }
+  }
   return (
     <Authcontext.Provider
       value={{
@@ -118,12 +166,16 @@ export default function AuthProvider({ children }) {
         isAuthenticated,
         loading,
         error,
+        trips,
         login,
         logout,
         setTrips,
-        trips,
-      }}
-    >
+        saveTrip,
+        createTrip,
+        setLoading,
+        fetchTripbyUser,
+        fetchTrip,
+      }}>
       {children}
     </Authcontext.Provider>
   );

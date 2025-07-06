@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../styles/index.css";
 import { motion } from 'framer-motion';
-import { Plane, Users, Calendar, MapPin, Palmtree } from 'lucide-react';
+import { Plane, Users, Calendar, MapPin, Palmtree, Wallet, Wallet2 } from 'lucide-react';
 import DatePicker from "react-datepicker";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/useAuth';
@@ -9,21 +9,20 @@ import PageNav from '../components/PageNav';
 import { useCities } from '../contexts/CitiesContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import TravelLoadingAnimation from '../Trip-Fetching-Firebase/TravelLoadingAnimation';
 
 export default function HotelForms() {
   const BASE_URL = "https://worldwise-backend-iota.vercel.app/api/auth";
-  const navigate = useNavigate();
   const { currentcity } = useCities();
-  const { user } = useAuth();
-
+  const { user,loading,setLoading,createTrip } = useAuth();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [formData, setFormData] = useState({
     destination: "",
     strength: "",
-    tripType: ""
+    tripType: "",
+    budget:"",
   });
-  const [loading, setLoading] = useState(false);
 
   // Set destination from currentcity
   useEffect(() => {
@@ -50,24 +49,17 @@ export default function HotelForms() {
       tripType: formData.tripType,
       startDate: startDate ? startDate.toISOString().split('T')[0] : null,
       endDate: endDate ? endDate.toISOString().split('T')[0] : null,
+      budget: formData.budget,
       userId: user._id
     };
-    console.log("Submitting trip data:", tripData);
     setLoading(true);
-    try {
-      const response = await axios.post(`${BASE_URL}/tripplan/firebase`, tripData);
-      console.log("Trip data submitted successfully:", response.data);
-      toast.success("Trip planned successfully!");
-      navigate("/trips");
-    } catch (error) {
-      console.error("Error fetching trip:", error);
-      toast.error("Trip planning failed.");
-    } finally {
-      setLoading(false);
-    }
+
+    createTrip(tripData);
+
   }
 
-  return (
+  return (<>
+  {loading ? <TravelLoadingAnimation />:
     <motion.div
       initial={{ opacity: 0, x: 700 }}
       animate={{ opacity: 1, x: 0 }}
@@ -181,6 +173,32 @@ export default function HotelForms() {
               </select>
             </label>
           </motion.div>
+          {/* Budget Input*/}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5 }}
+            className="space-y-2"
+          >
+            <label className="block text-purple-400 text-sm font-medium">
+              <div className="flex items-center gap-2 mb-2 text-2xl">
+                <Wallet className="w-6 h-6" />
+                Budget
+              </div>
+              <select
+                name='budget'
+                value={formData.strength}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 text-white"
+              >
+                <option value="">Select</option>
+                <option value="low">low</option>
+                <option value="moderate">Moderate</option>
+                <option value="high">High</option>
+
+              </select>
+            </label>
+          </motion.div>
 
           {/* Trip Type */}
           <motion.div
@@ -225,5 +243,7 @@ export default function HotelForms() {
         </form>
       </motion.div>
     </motion.div>
+    }
+    </>
   );
 }

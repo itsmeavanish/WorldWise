@@ -22,9 +22,9 @@ async function fetchImage(query) {
 }
 
 // Build structured prompt for Gemini
-function buildPrompt({ cityName, strength, tripType, numDays }) {
+function buildPrompt({ cityName, strength, tripType, numDays,budget }) {
   return `
-You are a travel planning assistant. Generate a detailed and engaging travel plan for a trip to ${cityName} that reflects a ${tripType} experience but also includes iconic and must-see places of the city. The trip is for a group of ${strength} people traveling for ${numDays} days.
+You are a travel planning assistant. Generate a detailed and engaging travel plan for a trip to ${cityName} that reflects a ${tripType} experience but also includes iconic and must-see places of the city. The trip is for a group of ${strength} people traveling for ${numDays} days for a${budget} budget.
 
 ✅ Return only a **valid JSON object** and nothing else.  
 ❌ Do not include markdown syntax, code blocks, or explanations.
@@ -100,13 +100,13 @@ Make sure all keys are present and filled — if any data is not available, use 
 }
 
 // Main function to generate and store the trip plan
-async function generateAndStoreTrip(cityName, strength, tripType, startDate, endDate, userId) {
+async function generateAndStoreTrip(cityName, strength, tripType, startDate, endDate, userId,budget) {
   try {
      const numDays = Math.ceil(
       (new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24)
     );
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-    const prompt = buildPrompt({ cityName, strength, tripType, numDays});
+    const prompt = buildPrompt({ cityName, strength, tripType, numDays,budget});
 
     const result = await model.generateContent(prompt);
     const rawText = result?.response?.text();

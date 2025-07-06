@@ -6,27 +6,12 @@ import { toast } from 'react-toastify';
 import { Calendar, Car, Clock, Hotel, MapPin, Star, Users, Utensils, Wifi } from 'lucide-react';
 import "./trips.css"
 export default function Tripdetails() {
-  const { user,setTrips,trips } = useAuth();
+  const { user,setTrips,trips,fetchTrip } = useAuth();
   const { currentcity } = useCities();
   const [activeFilter, setActiveFilter] = useState('hotels');
-
-  const API = "https://worldwise-backend-iota.vercel.app/api/auth/";
-  async function fetchTrips() {
-    try {
-      if(trips?.metadata?.city!==currentcity.cityName){
-      const response = await axios.get(`${API}tripplan/firebase?userId=${user._id}&city=${currentcity.cityName}`);
-      console.log("Fetched trip data:", response.data);
-      setTrips(response.data)}
-
-    } catch (error) {
-      toast.error("Error fetching trip data: " + error.message);
-      console.error("Error fetching trip data:", error);
-    }
-  }
-
   useEffect(() => {
     if (user._id) {
-      fetchTrips();
+      fetchTrip(currentcity);
       console.log("for the user",trips);
     }
   }, [user._id]);

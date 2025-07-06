@@ -38,7 +38,6 @@ const formatDate=(date)=>
 export default function City() {
     const {id}=useParams();
     const{getCity,currentcity,loading}=useCities();
-    console.log("current city",currentcity);
     useEffect(function(){
       getCity(id);
     },[id]);

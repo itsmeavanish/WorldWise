@@ -34,10 +34,10 @@ export default function App() {
               <Route path="signup" element={<Signup />} />
               <Route path="*" element={<PagenotFound />} />
               <Route path="features" element={<Features />} />
-                <Route path="trips" element={<ProtectedRoute><Trip /></ProtectedRoute>} />
+                <Route path="tripplan" element={<ProtectedRoute><Trip /></ProtectedRoute>} />
                 <Route path="hotelform" element={<HotelForms />} />
                 <Route path="loading" element={<TravelLoadingAnimation />} />
-
+       
               <Route
                 path="Applayout"
                 element={

@@ -1,3 +1,32 @@
+.gemini{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+gap: 10rem;
+}
+.header{
+    width: 100%;
+    position: absolute;
+    background-blend-mode: color-dodge;
+    backdrop-filter: blur(20px);
+    backdrop-filter: blur(1rem);
+    color: #E0F2FF;
+    z-index: 4;
+    top: 0rem;
+    position: fixed;
+   
+}
+.space{
+    height: 0rem;
+    background-color: transparent;
+}
+.hotellist{
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}
 .container {
   background-color: #101b2b; /* bg-gray-900 */
   color: #f9fafb; /* text-gray-100 */

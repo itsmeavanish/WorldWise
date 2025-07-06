@@ -56,7 +56,7 @@ export default function PageNav() {
             ) : (
               <button className="cta-button" onClick={()=>navigate('login')}>Get Started</button>
             )}
-           
+           <Link to="/trips" className='cta-button' >Your Trips</Link>
             {isAuthenticated && <Profile /> }
            
           </motion.div>

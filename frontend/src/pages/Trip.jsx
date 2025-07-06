@@ -10,7 +10,11 @@ export default function Trip() {
     <div>
         <PageNav />
     <div className='trip'>
-      <h1>{currentcity.cityName} Travel Experience</h1>
+      <div className='header'>
+        <h1>{currentcity.cityName} Travel Experience</h1>
+        <p>Welcome to City of Nawabs</p>
+      </div>
+      
       <Tripdetails />
     </div>
 

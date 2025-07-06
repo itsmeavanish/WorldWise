@@ -24,31 +24,7 @@
 }
 */
 /* Elegant Header */
-.header {
-  text-align: center;
-  margin-bottom: 60px;
-  position: relative;
-}
 
-.header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 4.5rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 50%, #94a3b8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -2px;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.header p {
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: #94a3b8;
-  letter-spacing: 0.5px;
-}
 
 /* Modern Filter Buttons */
 .filter-container {

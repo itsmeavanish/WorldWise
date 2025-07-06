@@ -3,7 +3,7 @@ import { MapPin, Plane } from 'lucide-react';
 
 const TravelLoadingAnimation= ({ 
   onComplete, 
-  duration = 12000 
+  duration = 20000 
 }) => {
   const [textIndex, setTextIndex] = useState(0);
   const [progress, setProgress] = useState(0);
