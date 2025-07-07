@@ -84,7 +84,7 @@ export default function AuthProvider({ children }) {
     const setLoading=(value)=>dispatch({type:"loading",payload:value});
       const fetchSavedTrips=async()=>{
     try{
-      const response =await axios.get(`${API_BASE_URL}/api/auth/trips/fetch?userId=${user._id}`);
+      const response =await axios.get(`${API_BASE_URL}api/auth/trips/fetch?userId=${user._id}`);
       setSavedTrips(response.data);
       console.log("Saved trips fetched successfully:", response.data);
     }
@@ -161,7 +161,7 @@ export default function AuthProvider({ children }) {
   }
   const fetchTripbyUser=async()=>{
     try {
-      const response=await axios.get(`${API_BASE_URL}/api/auth/trips/all?userId=${user._id}`);
+      const response=await axios.get(`${API_BASE_URL}api/auth/trips/all?userId=${user._id}`);
 
       console.log("Trips Response",response);
     } catch (error) {
@@ -172,7 +172,7 @@ export default function AuthProvider({ children }) {
   const fetchTrip=async(cityName)=>{
     try {
           if(trips?.metadata?.city!==cityName){
-          const response = await axios.get(`${API_BASE_URL}/api/auth/tripplan/firebase?userId=${user._id}&city=${cityName}`);
+          const response = await axios.get(`${API_BASE_URL}api/auth/tripplan/firebase?userId=${user._id}&city=${cityName}`);
           console.log("Fetched trip data:", response.data);
           setTrips(response.data)}
     
