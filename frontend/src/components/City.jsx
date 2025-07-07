@@ -68,10 +68,11 @@ export default function City() {
           Learn More
         </h6>
         <a href={"https://en.wikipedia.org/wiki/List_of_cities_in_India_by_population"} target='_blank' rel="noreferrer"> Check out {cityName} on Wikipedia</a>
-        <Link to="/hotelform" > Generate Your Travel Plan for this Trip</Link>
+        
       </div>
-      <div>
+      <div className={styles.buttons}>
         <BackButton/>
+        <button  className={styles.generate}> Generate Your Travel Plan for this Trip</button>
       </div>
     </div>
   )

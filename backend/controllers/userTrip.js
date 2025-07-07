@@ -8,7 +8,7 @@ const generateToken = (userId) => {
  const tripregister =async function (req,res) {
     try{
 
-        const {destination,startDate,endDate,strength,tripType,budget,userId}=req.body;
+        const {destination,startDate,endDate,strength,tripType,budget,userId,imageUrl}=req.body;
         if (!req.body){
          console.log("Credentials Empty")
          alert("Credentials Empty");
@@ -21,7 +21,8 @@ const generateToken = (userId) => {
           endDate,
           strength,
           tripType,
-          budget
+          budget,
+          imageUrl
         })
         if (Trip) {
          res.status(201).json({
@@ -40,12 +41,12 @@ const generateToken = (userId) => {
 
     }
  }
- const tripfetch=async function(){
+ const tripfetch=async function(req,res){
   try{
     const userId = req.query.userId;
     const trips=await Trips.find({userId}).sort({createdAt:-1});
     if (!trips || trips.length === 0) {
-      return res.status(404).json({ message: "No trips found" });
+      return res.status(200).json({ message: "No trips found", data: [] });
     }
     res.status(200).json(trips);
   }

@@ -42,11 +42,9 @@ function emojiToFlagSymbol(emoji) {
 export default function CityItem({city}) {
   const {currentcity,deleteCity,loading}=useCities();
    const {cityName,date,emoji,position}=city;
-   
    const emojiFlag=emojiToFlagSymbol(emoji);
    console.log("flag",emojiFlag);
    const id=city._id;
-   const {user}=useAuth();
    function handleclick(e){
     e.preventDefault();
     deleteCity(id);

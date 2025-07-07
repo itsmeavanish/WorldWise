@@ -13,7 +13,7 @@ const TripSchema = new mongoose.Schema(
         type:String,
     },
     startDate:{
-        type:Number,
+        type:String,
     },
     endDate: {
       type: String,
@@ -25,6 +25,9 @@ const TripSchema = new mongoose.Schema(
     userId:{
       type:String,
       required:true
+    },
+    imageUrl:{
+      type:String
     }
 
   },

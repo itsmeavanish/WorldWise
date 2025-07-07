@@ -82,32 +82,20 @@ export default function AuthProvider({ children }) {
   const setSavedTrips=(value)=>dispatch({type:"setSavedTrips",payload:value});
     const setTrips = (value) => dispatch({ type: "setTrips", payload: value });
     const setLoading=(value)=>dispatch({type:"loading",payload:value});
-  const fetchTrips=async()=>{
+      const fetchSavedTrips=async()=>{
     try{
-      const token=getToken();
-      if(!token) throw new Error("No Authntication Token Found and this error is found at AuthContext at fetchTrips function");
-      const response=await fetch(`${API_BASE_URL}api/auth/trips?userId=${user._id}`);
-      if (!response.ok) {
-        throw new Error("Failed to fetch trips");
-      }
-      const data = await response.json();
-      if (data && data.length > 0) {
-        setTrips(data);
-        localStorage.setItem("trips", JSON.stringify(data));
-      } else {
-        setTrips([]);
-        localStorage.removeItem("trips");
-      }
+      const response =await axios.get(`${API_BASE_URL}/api/auth/trips/fetch?userId=${user._id}`);
+      setSavedTrips(response.data);
+      console.log("Saved trips fetched successfully:", response.data);
     }
     catch(error){
-      console.log("Error fetching trips:", error);
-      dispatch({ type: "error", payload: error.response?.data?.error || "Failed to fetch trips" });
+      console.error("Error fetching saved trips:", error);
+      toast.error("Failed to fetch saved trips.");
     }
   }
   useEffect(() => {
     if (isAuthenticated) {
       fetchUserProfile();
-      fetchTrips();
     } else {
       dispatch({ type: "loading", payload: false });
     }
@@ -121,8 +109,19 @@ export default function AuthProvider({ children }) {
     dispatch({ type: "logout" });
   };
   const saveTrip=async(tripData)=>{
+    const imageUrl=fetchImage(tripData.cityName)
+    const newTrip={
+      cityName:tripData.cityName,
+      strength:tripData.strength,
+      startDate:tripData.startDate,
+      endDate:tripData.endData,
+      tripType:tripData.tripType,
+      budget:tripData.budget,
+      userId:tripData.userId,
+      imageUrl
+    }
     try{
-      const response=await axios.post(`${API_BASE_URL}api/auth/trips/tripregister`,tripData);
+      const response=await axios.post(`${API_BASE_URL}api/auth/trips/tripregister`,newTrip);
       console.log("Trip saved successfully",response.data);
       toast.success("Trip saved successfully!");
     }
@@ -131,21 +130,24 @@ export default function AuthProvider({ children }) {
       toast.error("Failed to save trip.");
     }
   }
-  const fetchSavedTrips=async()=>{
-    try{
-      const response =await axios.get(`${API_BASE_URL}api/auth/trips/fetch?userId=${user._id}`);
-      setSavedTrips(response.data);
-      console.log("Saved trips fetched successfully:", response.data);
-    }
-    catch(error){
-      console.error("Error fetching saved trips:", error);
-      toast.error("Failed to fetch saved trips.");
+  async function fetchImage(query) {
+    const API_KEY = process.env.GOOGLE_SEARCH_API_KEY;
+    const CX = process.env.GOOGLE_SEARCH_CX;
+    const url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&searchType=image&key=${API_KEY}&cx=${CX}`;
+  
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      return data?.items?.[0]?.link || null;
+    } catch (err) {
+      console.error("Image fetch failed:", err);
+      return null;
     }
   }
   const createTrip=async(tripData)=>{
     console.log(tripData)
+    
     try {
-       
       const response = await axios.post(`${API_BASE_URL}api/auth/tripplan/firebase`, tripData);
       saveTrip(tripData)
       toast.success("Trip planned successfully!");
@@ -159,7 +161,7 @@ export default function AuthProvider({ children }) {
   }
   const fetchTripbyUser=async()=>{
     try {
-      const response=await axios.get(`http://localhost:4000/api/auth/trips/all?userId=${user._id}`);
+      const response=await axios.get(`${API_BASE_URL}/api/auth/trips/all?userId=${user._id}`);
 
       console.log("Trips Response",response);
     } catch (error) {
@@ -167,10 +169,10 @@ export default function AuthProvider({ children }) {
       console.log(error);
     }
   }
-  const fetchTrip=async(currentcity)=>{
+  const fetchTrip=async(cityName)=>{
     try {
-          if(trips?.metadata?.city!==currentcity?.cityName){
-          const response = await axios.get(`${API_BASE_URL}api/auth/tripplan/firebase?userId=${user._id}&city=${currentcity.cityName}`);
+          if(trips?.metadata?.city!==cityName){
+          const response = await axios.get(`${API_BASE_URL}/api/auth/tripplan/firebase?userId=${user._id}&city=${cityName}`);
           console.log("Fetched trip data:", response.data);
           setTrips(response.data)}
     

@@ -32,8 +32,8 @@ function Form() {
   const [isLoadingGeoCoding, setIsLoadingGeoCoding] = useState(false);
   const [emoji, setEmoji] = useState("");
   const [geoCodingError, setGeoCodingError] = useState("");
-  const {user}=useAuth();
-  console.log("userssss",user);
+  const {user,loading,setLoading}=useAuth();
+
   useEffect(
     function () {
       if (!lat && !lng) return;
@@ -92,8 +92,9 @@ function Form() {
       userId:user?._id,
       email:user?.email,
     };
-
+    setLoading(true);
     await createCity(newCity);
+    setLoading(false);
     navigate("/Applayout");
   }
   return (
@@ -132,7 +133,7 @@ function Form() {
       </div>
 
       <div className={styles.buttons}>
-        <Button type="primary">Add</Button>
+        <Button type="primary" >{loading ? <Spinner /> :"Add"}</Button>
         <BackButton />
       </div>
     </form>

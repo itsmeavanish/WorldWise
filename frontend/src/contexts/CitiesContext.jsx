@@ -1,7 +1,5 @@
 import { createContext, useState, useEffect, useContext, useReducer } from "react";
 import { useAuth } from "./useAuth";
-
-
 const BASE_URL = "https://worldwise-backend-iota.vercel.app/api/auth";
 const getcurrentCity = () =>JSON.parse(localStorage.getItem("currentcity")) || {};
 const CitiesContext = createContext();
@@ -106,10 +104,13 @@ function reducer(state,action){
         dispatch({type:"setLoading",payload:false});
       }
     }
+    const setcurrentcity=(value)=>{
+      dispatch({type:"setCurrentCity",payload:value});
+    }
     return( 
         <CitiesContext.Provider 
         value={{
-          cities,loading,currentcity,getCity,createCity,deleteCity
+          cities,loading,currentcity,getCity,createCity,deleteCity,setcurrentcity
           }}>
             {children}
         </CitiesContext.Provider>
