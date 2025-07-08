@@ -65,7 +65,7 @@ export default function AuthProvider({ children }) {
   
   const fetchUserProfile = async () => {
     try {
-      dispatch({ type: "loading" });
+      dispatch({ type: "loading", value:true});
       const token = getToken();
       if (!token) throw new Error("No authentication token found");
 

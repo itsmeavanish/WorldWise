@@ -53,7 +53,6 @@ export default function HotelForms() {
       userId: user._id
     };
     setLoading(true);
-
     createTrip(tripData);
 
   }
