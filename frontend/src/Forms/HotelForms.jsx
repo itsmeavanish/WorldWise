@@ -211,21 +211,25 @@ export default function HotelForms() {
                 <Palmtree className="w-6 h-6" />
                 Trip Type
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                {['Beach', 'Mountain', 'City', 'Adventure'].map((type) => (
-                  <label key={type} className="flex items-center space-x-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="tripType"
-                      value={type}
-                      checked={formData.tripType === type}
-                      onChange={handleChange}
-                      className="form-radio text-purple-500"
-                    />
-                    <span className="text-white">{type}</span>
-                  </label>
-                ))}
-              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
+  {['Beach', 'Mountain', 'City', 'Adventure'].map((type) => (
+    <label
+      key={type}
+      className="flex items-center gap-2 p-3 rounded-lg bg-[#1e1e2f] hover:bg-[#2a2a40] transition cursor-pointer"
+    >
+      <input
+        type="radio"
+        name="tripType"
+        value={type}
+        checked={formData.tripType === type}
+        onChange={handleChange}
+        className="accent-purple-500 focus:outline-none focus:ring-0"
+      />
+      <span className="text-white font-medium">{type}</span>
+    </label>
+  ))}
+</div>
+
             </label>
           </motion.div>
 
