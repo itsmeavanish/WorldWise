@@ -109,9 +109,9 @@ export default function AuthProvider({ children }) {
     dispatch({ type: "logout" });
   };
   const saveTrip=async(tripData)=>{
-    const imageUrl=fetchImage(tripData.cityName)
+    const imageUrl=await fetchImage(tripData.cityName)
     const newTrip={
-      cityName:tripData.cityName,
+      destination:tripData.destination,
       strength:tripData.strength,
       startDate:tripData.startDate,
       endDate:tripData.endData,
@@ -122,7 +122,6 @@ export default function AuthProvider({ children }) {
     }
     try{
       const response=await axios.post(`${API_BASE_URL}api/auth/trips/tripregister`,newTrip);
-      console.log("Trip saved successfully",response.data);
       toast.success("Trip saved successfully!");
     }
     catch(error){
@@ -131,8 +130,8 @@ export default function AuthProvider({ children }) {
     }
   }
   async function fetchImage(query) {
-    const API_KEY = process.env.GOOGLE_SEARCH_API_KEY;
-    const CX = process.env.GOOGLE_SEARCH_CX;
+    const API_KEY = import.meta.env.GOOGLE_SEARCH_API_KEY;
+    const CX = import.meta.env.GOOGLE_SEARCH_CX;
     const url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&searchType=image&key=${API_KEY}&cx=${CX}`;
   
     try {
@@ -149,7 +148,7 @@ export default function AuthProvider({ children }) {
     
     try {
       const response = await axios.post(`${API_BASE_URL}api/auth/tripplan/firebase`, tripData);
-      saveTrip(tripData)
+      await saveTrip(tripData);
       toast.success("Trip planned successfully!");
       window.location.href="/tripplan"
     } catch (error) {

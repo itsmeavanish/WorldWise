@@ -98,6 +98,8 @@ function Form() {
     navigate("/Applayout");
   }
   return (
+    <>
+    {isLoadingGeoCoding?<Spinner/>:
     <form
       className={`${styles.form} ${isLoading ? styles.loading : ""}`}
       onSubmit={handleSubmit}
@@ -133,10 +135,13 @@ function Form() {
       </div>
 
       <div className={styles.buttons}>
-        <Button type="primary" >{loading ? <Spinner /> :"Add"}</Button>
+        <Button type="primary" >{loading ? "loading":"Add"}</Button>
         <BackButton />
       </div>
     </form>
+}
+    </>
+
   );
 }
 

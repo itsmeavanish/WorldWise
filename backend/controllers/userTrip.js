@@ -14,7 +14,6 @@ const generateToken = (userId) => {
          alert("Credentials Empty");
         }
         const Trip=await Trips.create({
-
           userId,
           destination,
           startDate,

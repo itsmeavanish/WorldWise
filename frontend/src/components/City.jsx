@@ -72,7 +72,7 @@ export default function City() {
       </div>
       <div className={styles.buttons}>
         <BackButton/>
-        <button  className={styles.generate}> Generate Your Travel Plan for this Trip</button>
+        <button  className={styles.generate} onClick={()=>window.location="/hotelform"}> Generate Your Travel Plan for this Trip</button>
       </div>
     </div>
   )

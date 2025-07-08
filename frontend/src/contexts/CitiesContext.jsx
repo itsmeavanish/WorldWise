@@ -26,7 +26,7 @@ function reducer(state,action){
   const userId = user?._id;
   
   const [{cities, loading, currentcity}, dispatch] = useReducer(reducer,cityState);
-    useEffect(function(){
+  const setLoading=(value)=>dispatch({type:"setLoading",payload:value});
       async function fetchCities(){
         try{
           dispatch({type:"setLoading",payload:true});
@@ -44,10 +44,6 @@ function reducer(state,action){
           dispatch({type:"setLoading",payload:false});
         }
       }
-      if(user){
-      fetchCities();
-    }
-    },[userId]);
     async function getCity(id){
 
       try{
@@ -110,7 +106,7 @@ function reducer(state,action){
     return( 
         <CitiesContext.Provider 
         value={{
-          cities,loading,currentcity,getCity,createCity,deleteCity,setcurrentcity
+          cities,loading,currentcity,getCity,createCity,deleteCity,setcurrentcity,fetchCities,setLoading
           }}>
             {children}
         </CitiesContext.Provider>
