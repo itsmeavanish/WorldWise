@@ -18,21 +18,24 @@ export default function PageNav() {
            if (isAuthenticated)
           return (
         
-           <div className='profilecontainer'>
-            <div className="user">
-              <img src={user?.profilePhoto} alt='error'/>
-              <span>Welcome {user?.name.split(" ")[0]}</span>
-            </div>
-            <div  className='profilebox'>
-              <div className='profileicon'>
-                <img src={user?.profilePhoto} alt="Profile" />
-              </div>
-               <h3>{user?.name || ""}</h3>
-               <p>Email: {user?.email || ""}</p>
-               <p> Joined At : {user?.createdAt.split("T")[0]}</p>
-                <button onClick={handleclick}>Logout</button>
-            </div>
-           </div>
+           <div className="profilecontainer">
+      {/* Compact top bar profile display */}
+      <div className="user">
+        <img src={user?.profilePhoto} alt="Profile" />
+        <span>Welcome {user?.name?.split(" ")[0]}</span>
+      </div>
+
+      {/* Hidden full profile card on hover */}
+      <div className="profilebox">
+        <div className="profileicon">
+          <img src={user?.profilePhoto} alt="Profile Full" />
+        </div>
+        <h3>{user?.name || ""}</h3>
+        <p>Email: {user?.email || ""}</p>
+        <p>Joined At: {user?.createdAt?.split("T")[0]}</p>
+        <button onClick={handleclick}>Logout</button>
+      </div>
+    </div>
           )
     }
   return ( 

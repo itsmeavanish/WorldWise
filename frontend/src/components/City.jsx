@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useCities } from '../contexts/CitiesContext';
 import styles from "./City.module.css"
 import Spinner from './Spinner';
 import BackButton from './BackButton';
+import HotelForms from '../Forms/HotelForms';
 
 const formatDate=(date)=>
   new Intl.DateTimeFormat("en",{
@@ -42,8 +43,9 @@ export default function City() {
       getCity(id);
     },[id]);
     const {cityName,emoji,date,notes}=currentcity;
+ 
   return (
-    <div className={styles.city} style={{background:"#1F2937"}} >
+    <>    <div className={styles.city} style={{background:"#1F2937"}} >
       <div className={styles.row}>
         <h6>CITYNAME</h6>
         <h3>
@@ -72,8 +74,11 @@ export default function City() {
       </div>
       <div className={styles.buttons}>
         <BackButton/>
-        <button  className={styles.generate} onClick={()=>window.location="/hotelform"}> Generate Your Travel Plan for this Trip</button>
+        <button  className={styles.generate} > Generate Your Travel Plan for this Trip</button>
       </div>
     </div>
+   
+    </>
+
   )
 }

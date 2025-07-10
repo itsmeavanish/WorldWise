@@ -9,21 +9,16 @@ export default function CityList() {
   const {cities,fetchCities}=useCities();
   const [loading, setLoading] = useState(true);
   useEffect(()=>{
-    setLoading(true);
     fetchCities();
-    setLoading(false);
   },[])
-  if (loading){
-    return <Spinner />
-  }
-    
+
   if (! cities?.length){
     return <Message message="Add your City By clicking on the map" />
   }
   return(
 
     <ul className={styles.cityList }>
-        {loading ? <Spinner />:cities?.map((city)=><CityItem city={city}/>)}
+        {cities?.map((city)=><CityItem city={city}/>)}
     </ul>
   )
 }
