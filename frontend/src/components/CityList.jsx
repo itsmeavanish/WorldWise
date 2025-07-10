@@ -7,7 +7,6 @@ import { useCities } from '../contexts/CitiesContext'
 export default function CityList() {
   
   const {cities,fetchCities}=useCities();
-  const [loading, setLoading] = useState(true);
   useEffect(()=>{
     fetchCities();
   },[])

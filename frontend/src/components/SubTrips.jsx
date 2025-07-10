@@ -6,7 +6,6 @@ import { useEffect } from "react";
 
 export default function SubTrips({ savedTrip }) {
   const { destination, strength, startDate, endDate, budget, tripType,imageUrl } = savedTrip;
-  const { setcurrentcity } = useCities();
   const navigate=useNavigate();
 
   function handlegotoTrip() {

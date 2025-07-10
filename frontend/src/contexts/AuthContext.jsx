@@ -86,6 +86,7 @@ export default function AuthProvider({ children }) {
     try{
       const response =await axios.get(`${API_BASE_URL}api/auth/trips/fetch?userId=${user._id}`);
       setSavedTrips(response.data);
+      console.log("Saved Trips",response.data)
       console.log("Saved trips fetched successfully:", response.data);
     }
     catch(error){
@@ -111,7 +112,7 @@ export default function AuthProvider({ children }) {
   const saveTrip=async(tripData)=>{
     const imageUrl=await fetchImage(tripData.cityName)
     const newTrip={
-      destination:tripData.destination,
+      destination:tripData.cityName,
       strength:tripData.strength,
       startDate:tripData.startDate,
       endDate:tripData.endData,

@@ -39,11 +39,15 @@ const formatDate=(date)=>
 export default function City() {
     const {id}=useParams();
     const{getCity,currentcity,loading}=useCities();
+    const [form,setform]=useState("inactive")
     useEffect(function(){
       getCity(id);
     },[id]);
     const {cityName,emoji,date,notes}=currentcity;
- 
+    function handleform(e){
+      e.preventDefault();
+      setform("active");
+    }
   return (
     <>    <div className={styles.city} style={{background:"#1F2937"}} >
       <div className={styles.row}>
@@ -74,10 +78,10 @@ export default function City() {
       </div>
       <div className={styles.buttons}>
         <BackButton/>
-        <button  className={styles.generate} > Generate Your Travel Plan for this Trip</button>
+        <button  className={styles.generate} onClick={handleform}> Generate Your Travel Plan for this Trip</button>
       </div>
     </div>
-   
+   {form==="active" ? <HotelForms />: null}
     </>
 
   )

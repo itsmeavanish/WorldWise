@@ -13,10 +13,8 @@ import { ToastContainer } from "react-toastify";
 import AuthProvider from "./contexts/AuthContext";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import Features from "./pages/Features";
-import HotelForms from "./Forms/HotelForms";
 
 import Trip from "./pages/Trip";
-import TravelLoadingAnimation from "./Trip-Fetching-Firebase/TravelLoadingAnimation";
 import Trips from "./pages/Trips";
 const HomePage=lazy(()=>import("./pages/Homepage"));
 const AppLayout=lazy(()=>import("./pages/AppLayout"));
@@ -36,8 +34,6 @@ export default function App() {
               <Route path="*" element={<PagenotFound />} />
               <Route path="features" element={<Features />} />
                 <Route path="tripplan" element={<ProtectedRoute><Trip /></ProtectedRoute>} />
-                <Route path="hotelform" element={<HotelForms />} />
-                <Route path="loading" element={<TravelLoadingAnimation />} />
                 <Route path="trips" element={<ProtectedRoute><Trips /></ProtectedRoute>} />
               <Route
                 path="Applayout"
