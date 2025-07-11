@@ -5,6 +5,7 @@ import { Plane, Users, Calendar, MapPin, Palmtree, Wallet } from "lucide-react";
 import DatePicker from "react-datepicker";
 import { useAuth } from "../contexts/useAuth";
 import { useCities } from "../contexts/CitiesContext";
+import TravelLoadingAnimation from "../Trip-Fetching-Firebase/TravelLoadingAnimation";
 
 export default function HotelForms() {
   const { currentcity } = useCities();
@@ -46,12 +47,17 @@ export default function HotelForms() {
       userId: user._id,
     };
     setLoading(true);
+    console.log("Submitting trip data:", tripData);
     createTrip(tripData);
   }
-if(loading)
-{
-  
-}  return (
+  if(loading){
+  return(
+    <span style={{width:"100vw", height:"100vh"}} className=" absolute z-40 top-0 left-0 right-0 bottom-0">
+      <TravelLoadingAnimation />
+    </span>
+  )
+  }
+  return (
     <motion.div
       initial={{ opacity: 0, x: 700 }}
       animate={{ opacity: 1, x: 0 }}

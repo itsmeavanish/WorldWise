@@ -115,7 +115,7 @@ export default function AuthProvider({ children }) {
       destination:tripData.cityName,
       strength:tripData.strength,
       startDate:tripData.startDate,
-      endDate:tripData.endData,
+      endDate:tripData.endDate,
       tripType:tripData.tripType,
       budget:tripData.budget,
       userId:tripData.userId,
@@ -145,12 +145,11 @@ export default function AuthProvider({ children }) {
     }
   }
   const createTrip=async(tripData)=>{
-    console.log(tripData)
-    
     try {
       const response = await axios.post(`${API_BASE_URL}api/auth/tripplan/firebase`, tripData);
-      await saveTrip(tripData);
-      toast.success("Trip planned successfully!");
+      if(response.message!=="Trip already exists"){
+         await saveTrip(tripData);
+      }
       window.location.href="/tripplan"
     } catch (error) {
       console.error("Error fetching trip:", error);

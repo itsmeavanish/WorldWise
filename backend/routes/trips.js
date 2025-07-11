@@ -7,12 +7,26 @@ const router = express.Router();
 // POST - Generate & Save Trip
 router.post("/tripplan/firebase", async (req, res) => {
   const { cityName,trripType,strength,startDate,endDate, userId } = req.body;
-  console.log("Received trip data:", req.body);
   if (!cityName || !userId) {
     return res.status(400).json({ error: "Missing cityName or userId" });
   }
-
   try {
+     const snapshot = await db
+      .collection("trip_metadata")
+      .where("userId", "==", userId)
+      .where("city", "==", cityName)
+      .orderBy("createdAt", "desc")
+      .limit(1)
+      .get();
+  
+    if (!snapshot.empty) {
+      const existingTrip = snapshot.docs[0].data();
+      console.log(`Trip already exists for user ${userId} in city ${cityName}`);
+      return res.status(200).json({
+        message: "Trip already exists",
+        metadata: existingTrip,
+      });
+    }
     const result = await generateAndStoreTrip(cityName,trripType,strength,startDate,endDate, userId);
     res.status(200).json(result);
   } catch (err) {

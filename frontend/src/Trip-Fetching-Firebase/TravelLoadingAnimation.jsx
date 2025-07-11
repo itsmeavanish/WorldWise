@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, Plane } from 'lucide-react';
 
+import { motion } from "framer-motion";
 const TravelLoadingAnimation= ({ 
   onComplete, 
   duration = 20000 
@@ -39,11 +40,17 @@ const TravelLoadingAnimation= ({
   }, [duration, onComplete]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center p-8">
-      <div className="text-center max-w-md">
+    <motion.div className="min-h-screen  flex items-center justify-center p-8 backdrop-blur-md"
+    initial={{opacity:0,y:20}}
+    animate={{opacity:1,y:0}}
+    transition={{duration:0.4}}>
+       <div className='absolute inset-0 z-0 pointer-events-none'>
+         <div className="w-full h-full bg-gradient-to-br from-slate-900/70 to-slate-800/70 backdrop-blur-md"  />
+       </div>
+      <div className="text-center max-w-md z-50">
         
         {/* Main Animation */}
-        <div className="relative mb-12">
+        <div className="relative mb-12 z-50" >
           <div className="w-80 h-2 bg-slate-700 rounded-full mx-auto mb-8 overflow-hidden">
             <div 
               className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-300 ease-out relative"
@@ -92,7 +99,8 @@ const TravelLoadingAnimation= ({
           <div className="w-3 h-3 bg-pink-500 rounded-full animate-bounce delay-200"></div>
         </div>
       </div>
-    </div>
+    </motion.div>
+
   );
 };
 

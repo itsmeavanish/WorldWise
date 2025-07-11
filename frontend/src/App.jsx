@@ -16,6 +16,7 @@ import Features from "./pages/Features";
 
 import Trip from "./pages/Trip";
 import Trips from "./pages/Trips";
+import TravelLoadingAnimation from "./Trip-Fetching-Firebase/TravelLoadingAnimation";
 const HomePage=lazy(()=>import("./pages/Homepage"));
 const AppLayout=lazy(()=>import("./pages/AppLayout"));
 const PagenotFound=lazy(()=>import("./pages/PagenotFound"));
@@ -35,6 +36,7 @@ export default function App() {
               <Route path="features" element={<Features />} />
                 <Route path="tripplan" element={<ProtectedRoute><Trip /></ProtectedRoute>} />
                 <Route path="trips" element={<ProtectedRoute><Trips /></ProtectedRoute>} />
+                <Route path="loading" element={<TravelLoadingAnimation />} />
               <Route
                 path="Applayout"
                 element={

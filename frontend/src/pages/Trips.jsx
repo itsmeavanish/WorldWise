@@ -35,7 +35,7 @@ export default function Trips() {
                   </div>
                   <div className={styles.tripcontainer}>
                     <div className={styles.grid}>
-                    {savedTrips?.length!==0 ? savedTrips.map((savedTrip,key,index)=>(<SubTrips savedTrip={savedTrip} key={savedTrip._id}/>)):savedTrips.message}
+                    {savedTrips?.message!=="No trips found"?savedTrips.map((savedTrip,key,index)=>(<SubTrips savedTrip={savedTrip} key={savedTrip._id}/>)):savedTrips.message}
                     </div>
                   </div>
                 </div>

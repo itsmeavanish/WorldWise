@@ -26,8 +26,7 @@ export default function Trip() {
         <PageNav />
     <div className='trip'>
       <div className='header'>
-        <h1>{cityName ? cityName :currentcity.cityName} Travel Experience</h1>
-        <p>Welcome to City of Nawabs</p>
+        <h1>{cityName ? cityName :currentcity.cityName} Trip Plan</h1>
       </div>
       
       <Tripdetails />
